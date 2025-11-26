@@ -1,0 +1,57 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["--yes", "@upstash/context7-mcp"],
+      "disabled": false
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "disabled": false
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@executeautomation/playwright-mcp-server"],
+      "disabled": false
+    },
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "ide-assistant"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "initial_instructions",
+        "activate_project",
+        "check_onboarding_performed",
+        "list_dir",
+        "list_dir",
+        "get_symbols_overview",
+        "read_memory",
+        "read_memory",
+        "search_for_pattern"
+      ]
+    },
+    "aws-knowledge-mcp-server": {
+      "command": "uvx",
+      "args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"]
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "AWS_DOCUMENTATION_PARTITION": "aws",
+        "MCP_USER_AGENT": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
