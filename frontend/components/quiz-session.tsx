@@ -17,10 +17,10 @@
  * Requirements: 1.1, 1.3, 1.4, 2.5, 4.1, 8.1
  */
 
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { ProgressBar } from "@/components/progress-bar";
 import { QuestionCard } from "@/components/question-card";
 import Timer from "@/components/timer";
+import type { Locale } from "@/i18n";
 import {
   getCorrectAnswerCount,
   getCurrentQuestion,
@@ -33,6 +33,8 @@ import { calculateQuizResult } from "@/lib/score-calculator";
 import { saveQuizState } from "@/lib/storage-manager";
 import { colors } from "@/lib/theme-constants";
 import type { QuizResult, QuizSession as QuizSessionType } from "@/lib/types";
+import { useLocale } from "next-intl";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 
 export interface QuizSessionProps {
   /** Callback when quiz is completed */
@@ -45,10 +47,27 @@ export interface QuizSessionProps {
  * QuizSession component manages the entire quiz flow
  */
 export function QuizSession({ onComplete, resumeSession }: QuizSessionProps) {
+  const locale = useLocale() as Locale;
+
   // Initialize quiz session state
-  const [session, setSession] = useState<QuizSessionType>(
-    () => resumeSession ?? initializeQuizSession()
-  );
+  const [session, setSession] = useState<QuizSessionType | null>(resumeSession ?? null);
+  const [isInitializing, setIsInitializing] = useState(!resumeSession);
+
+  // Initialize quiz session if not resuming
+  useEffect(() => {
+    if (!resumeSession && !session) {
+      setIsInitializing(true);
+      initializeQuizSession(locale)
+        .then((newSession) => {
+          setSession(newSession);
+          setIsInitializing(false);
+        })
+        .catch((error) => {
+          console.error("Failed to initialize quiz session:", error);
+          setIsInitializing(false);
+        });
+    }
+  }, [locale, resumeSession, session]);
 
   // Track if feedback is currently being shown
   const [showFeedback, setShowFeedback] = useState(false);
@@ -57,10 +76,10 @@ export function QuizSession({ onComplete, resumeSession }: QuizSessionProps) {
   const [currentAnswer, setCurrentAnswer] = useState<string | undefined>(undefined);
 
   // Memoize derived values to prevent unnecessary recalculations
-  const currentQuestion = useMemo(() => getCurrentQuestion(session), [session]);
-  const correctCount = useMemo(() => getCorrectAnswerCount(session), [session]);
-  const currentQuestionNumber = session.currentQuestionIndex + 1;
-  const quizComplete = useMemo(() => isQuizComplete(session), [session]);
+  const currentQuestion = useMemo(() => (session ? getCurrentQuestion(session) : null), [session]);
+  const correctCount = useMemo(() => (session ? getCorrectAnswerCount(session) : 0), [session]);
+  const currentQuestionNumber = session ? session.currentQuestionIndex + 1 : 0;
+  const quizComplete = useMemo(() => (session ? isQuizComplete(session) : false), [session]);
 
   /**
    * Handle answer selection
@@ -68,7 +87,7 @@ export function QuizSession({ onComplete, resumeSession }: QuizSessionProps) {
    */
   const handleAnswer = useCallback(
     (answerId: string) => {
-      if (!currentQuestion) return;
+      if (!currentQuestion || !session) return;
 
       // Record the answer and update session in one operation
       const updatedSession = recordAnswer(session, currentQuestion.id, answerId);
@@ -88,6 +107,8 @@ export function QuizSession({ onComplete, resumeSession }: QuizSessionProps) {
    * Handle moving to next question or completing quiz
    */
   const handleNext = useCallback(() => {
+    if (!session) return;
+
     // Check if quiz is complete
     if (quizComplete) {
       // Calculate final results using score calculator
@@ -116,8 +137,21 @@ export function QuizSession({ onComplete, resumeSession }: QuizSessionProps) {
 
   // Save state when session changes
   useEffect(() => {
-    saveQuizState(session);
+    if (session) {
+      saveQuizState(session);
+    }
   }, [session]);
+
+  // Show loading state while initializing
+  if (isInitializing || !session) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-xl" style={{ color: colors.ghostWhite }}>
+          Loading quiz...
+        </p>
+      </div>
+    );
+  }
 
   // If no current question, quiz is complete
   if (!currentQuestion) {

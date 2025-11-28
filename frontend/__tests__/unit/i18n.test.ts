@@ -23,14 +23,7 @@ describe("i18n - Translation Files", () => {
     });
 
     it("should have all required top-level keys", () => {
-      const requiredKeys = [
-        "common",
-        "home",
-        "quiz",
-        "results",
-        "domains",
-        "errors",
-      ];
+      const requiredKeys = ["common", "home", "quiz", "results", "domains", "errors"];
 
       for (const key of requiredKeys) {
         expect(enMessages).toHaveProperty(key);
@@ -112,21 +105,14 @@ describe("i18n - Translation Files", () => {
     });
 
     it("should have different descriptions in each language", () => {
-      expect(enMessages.common.appDescription).not.toBe(
-        jaMessages.common.appDescription
-      );
+      expect(enMessages.common.appDescription).not.toBe(jaMessages.common.appDescription);
       expect(enMessages.home.description).not.toBe(jaMessages.home.description);
     });
   });
 
   describe("Error message structure", () => {
     it("should have all error types", () => {
-      const errorTypes = [
-        "insufficientQuestions",
-        "corruptedData",
-        "quotaExceeded",
-        "generic",
-      ];
+      const errorTypes = ["insufficientQuestions", "corruptedData", "quotaExceeded", "generic"];
 
       for (const errorType of errorTypes) {
         expect(enMessages.errors).toHaveProperty(errorType);
@@ -295,8 +281,6 @@ describe("i18n - Results Page Translations", () => {
   it("should have different performance feedback in each language", () => {
     expect(enMessages.results.excellent).not.toBe(jaMessages.results.excellent);
     expect(enMessages.results.good).not.toBe(jaMessages.results.good);
-    expect(enMessages.results.needsImprovement).not.toBe(
-      jaMessages.results.needsImprovement
-    );
+    expect(enMessages.results.needsImprovement).not.toBe(jaMessages.results.needsImprovement);
   });
 });

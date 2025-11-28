@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "questions": [
+    {
+      "id": "q001",
+      "domain": "complex-organizations",
+      "text": "複数のAWSアカウントを持つ大企業が、一元化された請求とガバナンスを実装する必要があります。すべてのアカウントにわたってアクションを制限するために、サービスコントロールポリシー（SCP）を適用する機能が必要です。どのAWSサービスを使用すべきですか？",
+      "choices": [
+        {
+          "id": "q001-a",
+          "text": "AWS Control Tower と AWS Organizations"
+        },
+        {
+          "id": "q001-b",
+          "text": "AWS Systems Manager と AWS Config"
+        },
+        {
+          "id": "q001-c",
+          "text": "AWS CloudFormation StackSets"
+        },
+        {
+          "id": "q001-d",
+          "text": "AWS Resource Access Manager"
+        }
+      ],
+      "correctChoiceId": "q001-a",
+      "explanation": "AWS Control Tower と AWS Organizations は、一元化された請求、アカウント管理、および組織内のすべてのアカウントにサービスコントロールポリシー（SCP）を適用する機能を提供します。SCPは、組織内の権限を管理するために使用できる組織ポリシーの一種です。",
+      "difficulty": "medium",
+      "tags": ["AWS Organizations", "AWS Control Tower", "SCP", "マルチアカウント"]
+    }
+  ]
+}

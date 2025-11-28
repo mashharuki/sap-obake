@@ -5,7 +5,8 @@
  * It implements the business logic for creating quiz sessions with proper domain distribution.
  */
 
-import { getAllQuestions } from "./question-bank";
+import type { Locale } from "@/i18n";
+import { loadQuestions } from "./question-loader";
 import type { Question, QuizSession, UserAnswer } from "./types";
 import { ContentDomain } from "./types";
 
@@ -112,11 +113,12 @@ function selectOnePerDomain(questionsByDomain: Map<ContentDomain, Question[]>): 
  * 4. Randomly select remaining questions to reach 20 total
  * 5. Shuffle the final selection using Fisher-Yates algorithm
  *
- * @returns Array of 20 selected questions
+ * @param locale - The locale to load questions for
+ * @returns Promise resolving to array of 20 selected questions
  * @throws InsufficientQuestionsError if question bank has fewer than 20 questions
  */
-export function selectQuizQuestions(): Question[] {
-  const allQuestions = getAllQuestions();
+export async function selectQuizQuestions(locale: Locale): Promise<Question[]> {
+  const allQuestions = await loadQuestions(locale);
   const REQUIRED_QUESTION_COUNT = 20;
 
   // Validate we have enough questions
@@ -158,11 +160,12 @@ export function selectQuizQuestions(): Question[] {
  * - Initial state (no answers, not complete)
  * - Start time set to current timestamp
  *
- * @returns A new QuizSession object
+ * @param locale - The locale to load questions for
+ * @returns Promise resolving to a new QuizSession object
  * @throws InsufficientQuestionsError if question bank has fewer than 20 questions
  */
-export function initializeQuizSession(): QuizSession {
-  const questions = selectQuizQuestions();
+export async function initializeQuizSession(locale: Locale): Promise<QuizSession> {
+  const questions = await selectQuizQuestions(locale);
 
   // Generate a unique session ID
   const sessionId = `quiz-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
