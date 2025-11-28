@@ -1,0 +1,69 @@
+{
+  "common": {
+    "appName": "SAP Obake",
+    "appDescription": "AWS SAP Exam Prep Quiz",
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close"
+  },
+  "home": {
+    "title": "Welcome to SAP Obake",
+    "subtitle": "AWS Certified Solutions Architect - Professional Exam Prep",
+    "description": "Master AWS SAP exam knowledge efficiently with 20 time-attack style questions.",
+    "startQuiz": "Start Quiz",
+    "resumeQuiz": "Resume Quiz",
+    "newQuiz": "New Quiz",
+    "resumePrompt": "You have a saved quiz. Would you like to resume?"
+  },
+  "quiz": {
+    "question": "Question",
+    "of": " of ",
+    "correctCount": "Correct",
+    "timer": "Time",
+    "timeWarning": "30 minutes have passed",
+    "next": "Next",
+    "submit": "Submit",
+    "correct": "Correct!",
+    "incorrect": "Incorrect",
+    "correctAnswer": "Correct Answer",
+    "explanation": "Explanation",
+    "choiceLabel": "Choice"
+  },
+  "results": {
+    "title": "Results",
+    "score": "Score",
+    "totalTime": "Total Time",
+    "correctAnswers": "Correct Answers",
+    "percentage": "Percentage",
+    "domainPerformance": "Domain Performance",
+    "restart": "Try Again",
+    "excellent": "Excellent!",
+    "good": "Well Done!",
+    "needsImprovement": "Keep Practicing!"
+  },
+  "domains": {
+    "complex-organizations": "Complex Organizations",
+    "new-solutions": "New Solutions",
+    "continuous-improvement": "Continuous Improvement",
+    "migration-modernization": "Migration & Modernization"
+  },
+  "errors": {
+    "insufficientQuestions": {
+      "title": "Insufficient Questions",
+      "message": "At least 20 questions are required to start the quiz. Current count: {count}"
+    },
+    "corruptedData": {
+      "title": "Cannot Restore Session",
+      "message": "Your previous session data couldn't be restored. You can start a fresh quiz."
+    },
+    "quotaExceeded": {
+      "title": "Storage Quota Exceeded",
+      "message": "Browser storage is full. Clearing old data and retrying."
+    },
+    "generic": {
+      "title": "An Error Occurred",
+      "message": "An unexpected error occurred. Please reload the page."
+    }
+  }
+}
