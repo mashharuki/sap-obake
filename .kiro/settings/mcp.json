@@ -40,7 +40,8 @@
     },
     "aws-knowledge-mcp-server": {
       "command": "uvx",
-      "args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"]
+      "args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"],
+      "disabled": false
     },
     "awslabs.aws-documentation-mcp-server": {
       "command": "uvx",

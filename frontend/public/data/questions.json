@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "questions": [
+    {
+      "id": "q001",
+      "domain": "complex-organizations",
+      "text": "A large enterprise with multiple AWS accounts needs to implement centralized billing and governance. They require the ability to apply Service Control Policies (SCPs) to restrict actions across all accounts. Which AWS service should they use?",
+      "choices": [
+        {
+          "id": "q001-a",
+          "text": "AWS Control Tower with AWS Organizations"
+        },
+        {
+          "id": "q001-b",
+          "text": "AWS Systems Manager with AWS Config"
+        },
+        {
+          "id": "q001-c",
+          "text": "AWS CloudFormation StackSets"
+        },
+        {
+          "id": "q001-d",
+          "text": "AWS Resource Access Manager"
+        }
+      ],
+      "correctChoiceId": "q001-a",
+      "explanation": "AWS Control Tower with AWS Organizations provides centralized billing, account management, and the ability to apply Service Control Policies (SCPs) across all accounts in the organization. SCPs are a type of organization policy that you can use to manage permissions in your organization.",
+      "difficulty": "medium",
+      "tags": ["AWS Organizations", "AWS Control Tower", "SCP", "Multi-Account"]
+    }
+  ]
+}

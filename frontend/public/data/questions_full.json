@@ -1,0 +1,51 @@
+{
+  "version": "1.0.0",
+  "questions": [
+    {
+      "id": "q001",
+      "domain": "complex-organizations",
+      "text": "A large enterprise with multiple AWS accounts needs to implement centralized billing and governance. They require the ability to apply Service Control Policies (SCPs) to restrict actions across all accounts. Which AWS service should they use?",
+      "choices": [
+        {"id": "q001-a", "text": "AWS Control Tower with AWS Organizations"},
+        {"id": "q001-b", "text": "AWS Systems Manager with AWS Config"},
+        {"id": "q001-c", "text": "AWS CloudFormation StackSets"},
+        {"id": "q001-d", "text": "AWS Resource Access Manager"}
+      ],
+      "correctChoiceId": "q001-a",
+      "explanation": "AWS Control Tower with AWS Organizations provides centralized billing, account management, and the ability to apply Service Control Policies (SCPs) across all accounts in the organization.",
+      "difficulty": "medium",
+      "tags": ["AWS Organizations", "AWS Control Tower", "SCP"]
+    },
+    {
+      "id": "q002",
+      "domain": "new-solutions",
+      "text": "An application requires a database that can handle millions of requests per second with single-digit millisecond latency. The data model is key-value based. Which database service is most appropriate?",
+      "choices": [
+        {"id": "q002-a", "text": "Amazon RDS with read replicas"},
+        {"id": "q002-b", "text": "Amazon DynamoDB with on-demand capacity"},
+        {"id": "q002-c", "text": "Amazon Aurora Serverless"},
+        {"id": "q002-d", "text": "Amazon ElastiCache for Redis"}
+      ],
+      "correctChoiceId": "q002-b",
+      "explanation": "Amazon DynamoDB is designed for key-value workloads requiring single-digit millisecond latency at any scale. On-demand capacity mode automatically scales to handle millions of requests per second.",
+      "difficulty": "medium",
+      "tags": ["DynamoDB", "NoSQL", "Performance"]
+    },
+    {
+      "id": "q003",
+      "domain": "continuous-improvement",
+      "text": "A company wants to optimize costs for their EC2 instances that run batch processing jobs. The jobs can be interrupted and resumed. Which purchasing option provides the most cost savings?",
+      "choices": [
+        {"id": "q003-a", "text": "Reserved Instances with 3-year term"},
+        {"id": "q003-b", "text": "Savings Plans with 1-year term"},
+        {"id": "q003-c", "text": "Spot Instances with Spot Fleet"},
+        {"id": "q003-d", "text": "On-Demand Instances with Auto Scaling"}
+      ],
+      "correctChoiceId": "q003-c",
+      "explanation": "Spot Instances can provide up to 90% cost savings compared to On-Demand pri      "difficulty": "medium",
+      "tags"nd resumed, Spot Instances are ideal. Spot Fleet helps maintain capacity across multiple instance types.",
+      "difficulty": "medium",
+      "tags": ["EC2", "Spot Instances", "Cost Optimization"]
+    }
+  ]
+}

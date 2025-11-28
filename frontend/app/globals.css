@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+/* Haunted Theme Color Variables */
+:root {
+  /* Primary colors */
+  --ghost-white: #f8f8ff;
+  --midnight-purple: #2d1b4e;
+  --haunted-orange: #ff6b35;
+  --witch-green: #4a7c59;
+
+  /* Background colors */
+  --dark-void: #0a0a0a;
+  --shadow-gray: #1a1a1a;
+  --mist-gray: #2a2a2a;
+
+  /* Accent colors */
+  --blood-red: #8b0000;
+  --ghostly-blue: #4a5f7f;
+  --poison-green: #39ff14;
+
+  /* Feedback colors */
+  --correct-glow: #4ade80;
+  --incorrect-glow: #f87171;
+  --warning-glow: #fbbf24;
+
+  /* Default theme */
+  --background: var(--dark-void);
+  --foreground: var(--ghost-white);
+}
+
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ghost-white: var(--ghost-white);
+  --color-midnight-purple: var(--midnight-purple);
+  --color-haunted-orange: var(--haunted-orange);
+  --color-witch-green: var(--witch-green);
+  --color-dark-void: var(--dark-void);
+  --color-shadow-gray: var(--shadow-gray);
+  --color-mist-gray: var(--mist-gray);
+  --color-blood-red: var(--blood-red);
+  --color-ghostly-blue: var(--ghostly-blue);
+  --color-poison-green: var(--poison-green);
+  --color-correct-glow: var(--correct-glow);
+  --color-incorrect-glow: var(--incorrect-glow);
+  --color-warning-glow: var(--warning-glow);
+
+  /* Shadows */
+  --shadow-ghostly: 0 0 20px rgba(138, 43, 226, 0.5);
+  --shadow-eerie: 0 4px 20px rgba(0, 0, 0, 0.8);
+  --shadow-haunted: 0 0 30px rgba(255, 107, 53, 0.3);
+
+  /* Animations */
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-flicker: flicker 4s linear infinite;
+  --animate-fade-in: fadeIn 0.5s ease-in;
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-creepster);
+  --font-mono: var(--font-fira-code);
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
+  /* Improve text rendering on mobile */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Base font size - scales with viewport */
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+/* Improve touch interactions on mobile and tablets */
+button,
+a,
+[role="button"],
+input,
+select,
+textarea {
+  /* Optimize tap highlight for haunted theme */
+  -webkit-tap-highlight-color: rgba(255, 107, 53, 0.3);
+  /* Prevent double-tap zoom on iOS */
+  touch-action: manipulation;
+  /* Improve touch target size */
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Optimize for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase spacing for touch targets */
+  button,
+  a[role="button"] {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Larger tap targets for interactive elements */
+  .choice-button,
+  .next-button {
+    min-height: 48px;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== Accessibility Enhancements ===== */
+
+/* High-visibility focus indicators for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--haunted-orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Custom focus ring for buttons and interactive elements */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid var(--haunted-orange);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
+}
+
+/* Focus styles for form inputs */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--haunted-orange);
+  outline-offset: 2px;
+  border-color: var(--haunted-orange);
+}
+
+/* Skip to main content link for screen readers */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1rem 1.5rem;
+  background-color: var(--haunted-orange);
+  color: var(--dark-void);
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-to-main:focus {
+  left: 0;
+  top: 0;
+}
+
+/* Ensure sufficient color contrast for text */
+.text-contrast-high {
+  color: var(--ghost-white);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Keyboard navigation helper - show focus on tab */
+.keyboard-nav *:focus {
+  outline: 3px solid var(--haunted-orange);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --ghost-white: #ffffff;
+    --dark-void: #000000;
+    --haunted-orange: #ff8c00;
+  }
+
+  button,
+  a,
+  [role="button"] {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Ensure interactive elements are keyboard accessible */
+[role="button"]:not(button):not(a) {
+  cursor: pointer;
+}
+
+[role="button"]:not(button):not(a):focus {
+  outline: 3px solid var(--haunted-orange);
+  outline-offset: 2px;
+}
+
+/* Improve readability for long text */
+p,
+li,
+.text-content {
+  max-width: 70ch;
+  line-height: 1.6;
+}
+
+/* Ensure minimum touch target size (WCAG 2.5.5) */
+@media (pointer: coarse) {
+  button,
+  a,
+  [role="button"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
