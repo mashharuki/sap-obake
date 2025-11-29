@@ -20,6 +20,7 @@
 import { ProgressBar } from "@/components/progress-bar";
 import { QuestionCard } from "@/components/question-card";
 import Timer from "@/components/timer";
+import { Button } from "@/components/ui/button";
 import type { Locale } from "@/i18n";
 import {
   getCorrectAnswerCount,
@@ -264,28 +265,15 @@ const NextButton = memo(function NextButton({
 
   return (
     <nav className="quiz-navigation flex justify-center mt-4 sm:mt-6" aria-label="Quiz navigation">
-      <button
-        data-testid="next-button"
-        type="button"
+      <Button
         onClick={onClick}
-        className="next-button px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900"
-        style={
-          {
-            backgroundColor: colors.hauntedOrange,
-            color: colors.darkVoid,
-            border: `2px solid ${colors.hauntedOrange}`,
-            boxShadow: `0 0 20px ${colors.hauntedOrange}66`,
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-            minHeight: "48px",
-            minWidth: "120px",
-            "--tw-ring-color": colors.hauntedOrange,
-          } as React.CSSProperties
-        }
-        aria-label={ariaLabel}
+        variant="primary"
+        size="md"
+        ariaLabel={ariaLabel}
+        testId="next-button"
       >
         {buttonText}
-      </button>
+      </Button>
     </nav>
   );
 });
