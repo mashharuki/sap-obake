@@ -1,0 +1,135 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button Component Snapshots > Combined Variant and Size Snapshots > should match snapshot for ghost large button 1`] = `
+<button
+  aria-disabled="false"
+  class="px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: transparent; color: rgb(248, 248, 255); border: 2px solid rgb(248, 248, 255); box-shadow: none; -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #2D1B4E;"
+  type="button"
+>
+  Ghost Large
+</button>
+`;
+
+exports[`Button Component Snapshots > Combined Variant and Size Snapshots > should match snapshot for primary small button 1`] = `
+<button
+  aria-disabled="false"
+  class="px-4 py-2 text-sm rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: rgb(255, 107, 53); color: rgb(10, 10, 10); border: 2px solid rgb(255, 107, 53); box-shadow: 0 0 20px #FF6B3566, inset 0 2px 4px rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 80px; --tw-ring-color: #FF6B35;"
+  type="button"
+>
+  Primary Small
+</button>
+`;
+
+exports[`Button Component Snapshots > Combined Variant and Size Snapshots > should match snapshot for secondary medium button 1`] = `
+<button
+  aria-disabled="false"
+  class="px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: rgb(45, 27, 78); color: rgb(248, 248, 255); border: 2px solid rgb(45, 27, 78); box-shadow: 0 0 20px #2D1B4E66; -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #2D1B4E;"
+  type="button"
+>
+  Secondary Medium
+</button>
+`;
+
+exports[`Button Component Snapshots > Size Snapshots > should match snapshot for large size 1`] = `
+<button
+  aria-disabled="false"
+  class="px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: rgb(255, 107, 53); color: rgb(10, 10, 10); border: 2px solid rgb(255, 107, 53); box-shadow: 0 0 20px #FF6B3566, inset 0 2px 4px rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #FF6B35;"
+  type="button"
+>
+  Large Button
+</button>
+`;
+
+exports[`Button Component Snapshots > Size Snapshots > should match snapshot for medium size 1`] = `
+<button
+  aria-disabled="false"
+  class="px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: rgb(255, 107, 53); color: rgb(10, 10, 10); border: 2px solid rgb(255, 107, 53); box-shadow: 0 0 20px #FF6B3566, inset 0 2px 4px rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #FF6B35;"
+  type="button"
+>
+  Medium Button
+</button>
+`;
+
+exports[`Button Component Snapshots > Size Snapshots > should match snapshot for small size 1`] = `
+<button
+  aria-disabled="false"
+  class="px-4 py-2 text-sm rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: rgb(255, 107, 53); color: rgb(10, 10, 10); border: 2px solid rgb(255, 107, 53); box-shadow: 0 0 20px #FF6B3566, inset 0 2px 4px rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 80px; --tw-ring-color: #FF6B35;"
+  type="button"
+>
+  Small Button
+</button>
+`;
+
+exports[`Button Component Snapshots > State Snapshots > should match snapshot for button with aria-label 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="Custom Label"
+  class="px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: rgb(255, 107, 53); color: rgb(10, 10, 10); border: 2px solid rgb(255, 107, 53); box-shadow: 0 0 20px #FF6B3566, inset 0 2px 4px rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #FF6B35;"
+  type="button"
+>
+  Aria Label Button
+</button>
+`;
+
+exports[`Button Component Snapshots > State Snapshots > should match snapshot for button with custom className 1`] = `
+<button
+  aria-disabled="false"
+  class="px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 custom-class"
+  style="background-color: rgb(255, 107, 53); color: rgb(10, 10, 10); border: 2px solid rgb(255, 107, 53); box-shadow: 0 0 20px #FF6B3566, inset 0 2px 4px rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #FF6B35;"
+  type="button"
+>
+  Custom Class Button
+</button>
+`;
+
+exports[`Button Component Snapshots > State Snapshots > should match snapshot for disabled button 1`] = `
+<button
+  aria-disabled="true"
+  class="px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  disabled=""
+  style="background-color: rgb(255, 107, 53); color: rgb(10, 10, 10); border: 2px solid rgb(255, 107, 53); box-shadow: 0 0 20px #FF6B3566, inset 0 2px 4px rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #FF6B35;"
+  type="button"
+>
+  Disabled Button
+</button>
+`;
+
+exports[`Button Component Snapshots > Variant Snapshots > should match snapshot for ghost variant 1`] = `
+<button
+  aria-disabled="false"
+  class="px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: transparent; color: rgb(248, 248, 255); border: 2px solid rgb(248, 248, 255); box-shadow: none; -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #2D1B4E;"
+  type="button"
+>
+  Ghost Button
+</button>
+`;
+
+exports[`Button Component Snapshots > Variant Snapshots > should match snapshot for primary variant 1`] = `
+<button
+  aria-disabled="false"
+  class="px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: rgb(255, 107, 53); color: rgb(10, 10, 10); border: 2px solid rgb(255, 107, 53); box-shadow: 0 0 20px #FF6B3566, inset 0 2px 4px rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #FF6B35;"
+  type="button"
+>
+  Primary Button
+</button>
+`;
+
+exports[`Button Component Snapshots > Variant Snapshots > should match snapshot for secondary variant 1`] = `
+<button
+  aria-disabled="false"
+  class="px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-base sm:text-lg rounded-lg font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+  style="background-color: rgb(45, 27, 78); color: rgb(248, 248, 255); border: 2px solid rgb(45, 27, 78); box-shadow: 0 0 20px #2D1B4E66; -webkit-tap-highlight-color: transparent; min-height: 48px; min-width: 120px; --tw-ring-color: #2D1B4E;"
+  type="button"
+>
+  Secondary Button
+</button>
+`;

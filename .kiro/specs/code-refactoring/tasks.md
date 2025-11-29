@@ -8,7 +8,7 @@
   - Document current button styles and usage patterns
   - _Requirements: 5.2, 6.4_
 
-- [ ] 2. Consolidate validation logic
+- [-] 2. Consolidate validation logic
 - [x] 2.1 Create unified validation functions in question-loader.ts
   - Add `validateQuestion()` function for single question validation
   - Add `validateQuestions()` function for batch validation
@@ -16,7 +16,7 @@
   - Ensure error message format is consistent
   - _Requirements: 2.2, 2.4_
 
-- [ ] 2.2 Write property test for validation equivalence
+- [x] 2.2 Write property test for validation equivalence
   - **Property 3: Validation behavior equivalence**
   - **Validates: Requirements 2.2**
   - Generate random question objects
@@ -34,7 +34,7 @@
   - Update function calls to use new unified functions
   - _Requirements: 1.2, 1.3_
 
-- [ ] 2.5 Write unit tests for unified validation
+- [x] 2.5 Write unit tests for unified validation
   - Test valid question validation
   - Test invalid question validation
   - Test batch validation with mixed valid/invalid
@@ -46,7 +46,7 @@
   - Run `pnpm test` to verify all tests pass
   - _Requirements: 1.4, 6.4_
 
-- [ ] 3. Create shared Button component
+- [-] 3. Create shared Button component
 - [x] 3.1 Create Button component file
   - Create `frontend/components/ui/button.tsx`
   - Define ButtonProps interface with all variants
@@ -63,7 +63,7 @@
   - Ensure accessibility (focus states, aria-label)
   - _Requirements: 3.3, 3.4_
 
-- [ ] 3.3 Write unit tests for Button component
+- [x] 3.3 Write unit tests for Button component
   - Test each variant renders correctly
   - Test each size renders correctly
   - Test disabled state
@@ -72,21 +72,21 @@
   - Test aria-label setting
   - _Requirements: 3.2, 3.3, 3.4_
 
-- [ ] 3.4 Write property test for button prop acceptance
+- [x] 3.4 Write property test for button prop acceptance
   - **Property 6: Button component prop acceptance**
   - **Validates: Requirements 3.4**
   - Generate random valid prop combinations
   - Verify component renders without errors
   - Ensure 100+ iterations
 
-- [ ] 3.5 Create snapshot tests for button variants
+- [x] 3.5 Create snapshot tests for button variants
   - Snapshot test for primary variant
   - Snapshot test for secondary variant
   - Snapshot test for ghost variant
   - Snapshot test for all sizes
   - _Requirements: 3.3_
 
-- [ ] 4. Integrate Button component into existing components
+- [-] 4. Integrate Button component into existing components
 - [x] 4.1 Update quiz-session.tsx to use Button
   - Replace NextButton inline button with shared Button component
   - Map existing props to Button component props
@@ -99,7 +99,7 @@
   - Verify visual appearance matches original
   - _Requirements: 3.2, 3.3, 5.3_
 
-- [ ] 4.3 Write integration tests for button usage
+- [x] 4.3 Write integration tests for button usage
   - Test quiz-session button interactions
   - Test results-summary button interactions
   - Verify onClick handlers work correctly
@@ -129,20 +129,20 @@
   - Document new Button component usage
   - _Requirements: 4.2_
 
-- [ ] 6. Final verification and testing
+- [x] 6. Final verification and testing
 - [x] 6.1 Run full test suite
   - Run `pnpm test` to verify all tests pass
   - Verify no tests were modified (backward compatibility)
   - Check test coverage is maintained
   - _Requirements: 5.2, 6.4_
 
-- [ ] 6.2 Write property test for API compatibility
+- [x] 6.2 Write property test for API compatibility
   - **Property 8: Public API compatibility**
   - **Validates: Requirements 5.1, 5.3, 5.4**
   - Verify exported function signatures unchanged
   - Verify component prop interfaces unchanged
 
-- [ ] 6.3 Write property test for application behavior equivalence
+- [x] 6.3 Write property test for application behavior equivalence
   - **Property 9: Application behavior equivalence**
   - **Validates: Requirements 5.5**
   - Test complete quiz flow
