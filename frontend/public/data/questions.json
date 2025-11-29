@@ -27,6 +27,2685 @@
       "explanation": "AWS Control Tower with AWS Organizations provides centralized billing, account management, and the ability to apply Service Control Policies (SCPs) across all accounts in the organization. SCPs are a type of organization policy that you can use to manage permissions in your organization.",
       "difficulty": "medium",
       "tags": ["AWS Organizations", "AWS Control Tower", "SCP", "Multi-Account"]
+    },
+    {
+      "id": "q002",
+      "domain": "complex-organizations",
+      "text": "A company needs to connect their on-premises data center to multiple VPCs across different AWS regions. They require low latency, high bandwidth, and want to avoid traversing the public internet. What is the MOST cost-effective and scalable solution?",
+      "choices": [
+        {
+          "id": "q002-a",
+          "text": "Use AWS Direct Connect with a Direct Connect Gateway to connect to VPCs in multiple regions"
+        },
+        {
+          "id": "q002-b",
+          "text": "Establish Site-to-Site VPN connections to each VPC in each region"
+        },
+        {
+          "id": "q002-c",
+          "text": "Use VPC Peering connections between all VPCs and a single Direct Connect connection"
+        },
+        {
+          "id": "q002-d",
+          "text": "Deploy AWS Transit Gateway in each region and connect via VPN"
+        }
+      ],
+      "correctChoiceId": "q002-a",
+      "explanation": "AWS Direct Connect with a Direct Connect Gateway allows you to connect your on-premises network to multiple VPCs across different AWS regions using a single Direct Connect connection. This provides low latency, high bandwidth, and avoids the public internet. It's more cost-effective than multiple VPN connections and more scalable than VPC peering.",
+      "difficulty": "medium",
+      "tags": ["Direct Connect", "Direct Connect Gateway", "Multi-Region", "Networking"]
+    },
+    {
+      "id": "q003",
+      "domain": "complex-organizations",
+      "text": "An organization with 50+ AWS accounts wants to enforce that all EC2 instances must be tagged with 'CostCenter' and 'Environment' tags. Non-compliant resources should be automatically identified. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q003-a",
+          "text": "Use AWS Config with custom rules and AWS Config Aggregator for multi-account compliance"
+        },
+        {
+          "id": "q003-b",
+          "text": "Create Lambda functions in each account to check tags periodically"
+        },
+        {
+          "id": "q003-c",
+          "text": "Use AWS Systems Manager Inventory to track resource tags"
+        },
+        {
+          "id": "q003-d",
+          "text": "Implement Service Control Policies (SCPs) to prevent resource creation without tags"
+        }
+      ],
+      "correctChoiceId": "q003-a",
+      "explanation": "AWS Config with custom rules can evaluate resource configurations against desired states. AWS Config Aggregator allows you to aggregate compliance data from multiple accounts and regions into a single account. This provides centralized visibility and automated compliance checking. While SCPs can prevent creation, they don't identify existing non-compliant resources.",
+      "difficulty": "medium",
+      "tags": ["AWS Config", "Compliance", "Multi-Account", "Tagging"]
+    },
+    {
+      "id": "q004",
+      "domain": "complex-organizations",
+      "text": "A financial services company needs to implement a multi-account strategy with strict network isolation. They want to centrally manage VPC routing and security while allowing individual teams to manage their own VPCs. Which architecture should they implement?",
+      "choices": [
+        {
+          "id": "q004-a",
+          "text": "AWS Transit Gateway with separate route tables per account and centralized Network Firewall"
+        },
+        {
+          "id": "q004-b",
+          "text": "VPC Peering between all VPCs with Network ACLs for security"
+        },
+        {
+          "id": "q004-c",
+          "text": "AWS PrivateLink endpoints in each VPC"
+        },
+        {
+          "id": "q004-d",
+          "text": "Direct Connect Gateway with VPN backup connections"
+        }
+      ],
+      "correctChoiceId": "q004-a",
+      "explanation": "AWS Transit Gateway acts as a central hub for connecting VPCs and on-premises networks. It supports separate route tables for network isolation and can integrate with AWS Network Firewall for centralized security inspection. This provides the required isolation while maintaining central management. VPC Peering doesn't scale well for many VPCs, and PrivateLink is for service endpoints, not general connectivity.",
+      "difficulty": "hard",
+      "tags": ["Transit Gateway", "Network Firewall", "Multi-Account", "Network Isolation"]
+    },
+    {
+      "id": "q005",
+      "domain": "complex-organizations",
+      "text": "A company wants to implement a disaster recovery strategy across multiple AWS regions with an RTO of 1 hour and RPO of 15 minutes for their critical applications. What is the MOST appropriate DR strategy?",
+      "choices": [
+        {
+          "id": "q005-a",
+          "text": "Warm Standby with continuous data replication and scaled-down infrastructure in the DR region"
+        },
+        {
+          "id": "q005-b",
+          "text": "Pilot Light with minimal infrastructure and data replication"
+        },
+        {
+          "id": "q005-c",
+          "text": "Backup and Restore using AWS Backup with cross-region replication"
+        },
+        {
+          "id": "q005-d",
+          "text": "Multi-Site Active-Active with full capacity in both regions"
+        }
+      ],
+      "correctChoiceId": "q005-a",
+      "explanation": "Warm Standby maintains a scaled-down but fully functional version of your environment in the DR region with continuous data replication. This can meet the 1-hour RTO requirement by scaling up resources when needed, and the 15-minute RPO through continuous replication. Pilot Light would struggle with the 1-hour RTO, Backup and Restore can't meet the 15-minute RPO, and Multi-Site Active-Active is unnecessarily expensive for these requirements.",
+      "difficulty": "hard",
+      "tags": ["Disaster Recovery", "RTO", "RPO", "Multi-Region", "Warm Standby"]
+    },
+    {
+      "id": "q006",
+      "domain": "complex-organizations",
+      "text": "An enterprise needs to share a central VPC with multiple AWS accounts for shared services like Active Directory and DNS. Individual accounts should not be able to modify the shared resources. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q006-a",
+          "text": "Use AWS Resource Access Manager (RAM) to share VPC subnets with other accounts"
+        },
+        {
+          "id": "q006-b",
+          "text": "Create VPC Peering connections from each account to the central VPC"
+        },
+        {
+          "id": "q006-c",
+          "text": "Use AWS PrivateLink to expose services from the central VPC"
+        },
+        {
+          "id": "q006-d",
+          "text": "Deploy AWS Transit Gateway and attach all VPCs"
+        }
+      ],
+      "correctChoiceId": "q006-a",
+      "explanation": "AWS Resource Access Manager (RAM) allows you to share VPC subnets with other AWS accounts. Participant accounts can launch resources into the shared subnets but cannot modify the subnet configuration or other shared resources. This provides the required access control. VPC Peering requires managing many connections, PrivateLink is for service endpoints, and Transit Gateway doesn't provide the same level of resource sharing and protection.",
+      "difficulty": "medium",
+      "tags": ["Resource Access Manager", "VPC Sharing", "Multi-Account", "Shared Services"]
+    },
+    {
+      "id": "q007",
+      "domain": "complex-organizations",
+      "text": "A company wants to implement centralized logging for CloudTrail, VPC Flow Logs, and application logs from 100+ AWS accounts. They need to retain logs for 7 years for compliance and want to minimize costs. What is the MOST cost-effective solution?",
+      "choices": [
+        {
+          "id": "q007-a",
+          "text": "Use S3 bucket with S3 Intelligent-Tiering and S3 Glacier for long-term retention, with CloudWatch Logs subscription filters"
+        },
+        {
+          "id": "q007-b",
+          "text": "Store all logs in CloudWatch Logs with 7-year retention policy"
+        },
+        {
+          "id": "q007-c",
+          "text": "Use Amazon OpenSearch Service with UltraWarm nodes for long-term storage"
+        },
+        {
+          "id": "q007-d",
+          "text": "Store logs in EBS volumes attached to EC2 instances"
+        }
+      ],
+      "correctChoiceId": "q007-a",
+      "explanation": "S3 with Intelligent-Tiering automatically moves data to the most cost-effective access tier, and S3 Glacier provides very low-cost long-term storage for compliance. CloudWatch Logs subscription filters can forward logs to S3. This is much more cost-effective than keeping logs in CloudWatch Logs for 7 years. OpenSearch Service is expensive for long-term storage, and EBS volumes are not designed for this use case.",
+      "difficulty": "medium",
+      "tags": ["CloudTrail", "VPC Flow Logs", "S3", "Cost Optimization", "Compliance"]
+    },
+    {
+      "id": "q008",
+      "domain": "complex-organizations",
+      "text": "A global company needs to implement a hub-and-spoke network architecture connecting 20 VPCs across 5 AWS regions with on-premises data centers. They require centralized egress to the internet and inspection of all inter-VPC traffic. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q008-a",
+          "text": "Deploy AWS Transit Gateway in each region with inter-region peering, centralized NAT Gateway, and AWS Network Firewall in the hub VPC"
+        },
+        {
+          "id": "q008-b",
+          "text": "Use VPC Peering mesh with NAT Gateways in each VPC"
+        },
+        {
+          "id": "q008-c",
+          "text": "Implement AWS PrivateLink endpoints in each VPC"
+        },
+        {
+          "id": "q008-d",
+          "text": "Deploy VPN connections from each VPC to on-premises"
+        }
+      ],
+      "correctChoiceId": "q008-a",
+      "explanation": "AWS Transit Gateway provides hub-and-spoke connectivity and supports inter-region peering. By routing all traffic through a central hub VPC with NAT Gateway and Network Firewall, you can achieve centralized egress and traffic inspection. This architecture scales well and provides the required centralized control. VPC Peering doesn't support transitive routing, PrivateLink is for service endpoints, and VPN connections don't provide the required centralized inspection.",
+      "difficulty": "hard",
+      "tags": ["Transit Gateway", "Network Firewall", "Hub-and-Spoke", "Multi-Region", "Network Architecture"]
+    },
+    {
+      "id": "q009",
+      "domain": "complex-organizations",
+      "text": "An organization wants to implement a cost allocation strategy across multiple business units using separate AWS accounts. They need detailed cost breakdowns and want to enforce budget limits. What combination of services should they use?",
+      "choices": [
+        {
+          "id": "q009-a",
+          "text": "AWS Organizations with consolidated billing, Cost Allocation Tags, AWS Budgets, and Cost Explorer"
+        },
+        {
+          "id": "q009-b",
+          "text": "Separate AWS accounts with individual billing and manual cost aggregation"
+        },
+        {
+          "id": "q009-c",
+          "text": "AWS Cost and Usage Report with Amazon QuickSight"
+        },
+        {
+          "id": "q009-d",
+          "text": "AWS Trusted Advisor and CloudWatch billing alarms"
+        }
+      ],
+      "correctChoiceId": "q009-a",
+      "explanation": "AWS Organizations with consolidated billing provides a single bill for all accounts. Cost Allocation Tags enable detailed cost tracking by business unit. AWS Budgets can enforce spending limits and send alerts. Cost Explorer provides visualization and analysis. This combination provides comprehensive cost management. While Cost and Usage Report with QuickSight can provide analysis, it doesn't include budget enforcement. Trusted Advisor provides recommendations but not detailed cost allocation.",
+      "difficulty": "medium",
+      "tags": ["Cost Management", "AWS Organizations", "Cost Allocation Tags", "AWS Budgets", "Cost Explorer"]
+    },
+    {
+      "id": "q010",
+      "domain": "complex-organizations",
+      "text": "A company needs to implement a security strategy that prevents any account in their AWS Organization from disabling CloudTrail logging or deleting CloudTrail logs. What is the MOST effective approach?",
+      "choices": [
+        {
+          "id": "q010-a",
+          "text": "Create a Service Control Policy (SCP) that denies cloudtrail:StopLogging and cloudtrail:DeleteTrail actions, and enable S3 Object Lock on the CloudTrail S3 bucket"
+        },
+        {
+          "id": "q010-b",
+          "text": "Use IAM policies in each account to restrict CloudTrail permissions"
+        },
+        {
+          "id": "q010-c",
+          "text": "Enable AWS Config rules to detect CloudTrail changes"
+        },
+        {
+          "id": "q010-d",
+          "text": "Use AWS CloudFormation StackSets to deploy CloudTrail with deletion protection"
+        }
+      ],
+      "correctChoiceId": "q010-a",
+      "explanation": "Service Control Policies (SCPs) in AWS Organizations provide guardrails that apply to all accounts, including the root user. By denying cloudtrail:StopLogging and cloudtrail:DeleteTrail, you prevent disabling CloudTrail. S3 Object Lock prevents deletion of logs even if someone has S3 permissions. This provides defense in depth. IAM policies can be modified by account administrators. Config rules detect but don't prevent changes. CloudFormation doesn't provide the same level of protection as SCPs.",
+      "difficulty": "hard",
+      "tags": ["Service Control Policy", "CloudTrail", "Security", "AWS Organizations", "S3 Object Lock"]
+    }
+,
+    {
+      "id": "q011",
+      "domain": "new-solutions",
+      "text": "A company is designing a new microservices application that requires automatic deployment with zero downtime. They want to implement blue/green deployments with automatic rollback on failure. Which AWS services combination is MOST appropriate?",
+      "choices": [
+        {
+          "id": "q011-a",
+          "text": "AWS CodeDeploy with Application Load Balancer and Auto Scaling groups"
+        },
+        {
+          "id": "q011-b",
+          "text": "AWS Elastic Beanstalk with rolling deployments"
+        },
+        {
+          "id": "q011-c",
+          "text": "AWS CloudFormation with change sets"
+        },
+        {
+          "id": "q011-d",
+          "text": "AWS Systems Manager with Run Command"
+        }
+      ],
+      "correctChoiceId": "q011-a",
+      "explanation": "AWS CodeDeploy supports blue/green deployments with automatic rollback capabilities. When integrated with Application Load Balancer and Auto Scaling groups, it can shift traffic between blue and green environments with zero downtime. CodeDeploy monitors deployment health and automatically rolls back if issues are detected. Elastic Beanstalk rolling deployments don't provide true blue/green capability. CloudFormation change sets are for infrastructure changes, not application deployments. Systems Manager Run Command doesn't provide deployment orchestration.",
+      "difficulty": "medium",
+      "tags": ["CodeDeploy", "Blue/Green Deployment", "ALB", "Auto Scaling", "CI/CD"]
+    },
+    {
+      "id": "q012",
+      "domain": "new-solutions",
+      "text": "A financial application requires encryption of all data at rest and in transit. The encryption keys must be rotated automatically every 90 days, and all key usage must be audited. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q012-a",
+          "text": "AWS KMS with automatic key rotation enabled and CloudTrail logging"
+        },
+        {
+          "id": "q012-b",
+          "text": "AWS Secrets Manager with custom Lambda rotation function"
+        },
+        {
+          "id": "q012-c",
+          "text": "AWS CloudHSM with manual key rotation scripts"
+        },
+        {
+          "id": "q012-d",
+          "text": "Client-side encryption with keys stored in S3"
+        }
+      ],
+      "correctChoiceId": "q012-a",
+      "explanation": "AWS KMS provides automatic key rotation every year (365 days) for customer managed keys, and you can implement custom rotation for 90-day cycles using Lambda. All KMS API calls are logged in CloudTrail, providing complete audit trails. KMS integrates with most AWS services for encryption at rest and supports TLS for encryption in transit. Secrets Manager is for secrets, not general encryption keys. CloudHSM requires manual management. Storing keys in S3 is insecure.",
+      "difficulty": "medium",
+      "tags": ["KMS", "Encryption", "Key Rotation", "CloudTrail", "Security"]
+    },
+    {
+      "id": "q013",
+      "domain": "new-solutions",
+      "text": "A company is building a real-time analytics platform that ingests 100,000 events per second. The data must be processed, transformed, and stored for both real-time dashboards and historical analysis. What architecture should they implement?",
+      "choices": [
+        {
+          "id": "q013-a",
+          "text": "Amazon Kinesis Data Streams with Lambda for processing, Kinesis Data Firehose to S3, and Amazon Athena for analysis"
+        },
+        {
+          "id": "q013-b",
+          "text": "Amazon SQS with EC2 instances for processing and RDS for storage"
+        },
+        {
+          "id": "q013-c",
+          "text": "Amazon SNS with Lambda subscribers and DynamoDB for storage"
+        },
+        {
+          "id": "q013-d",
+          "text": "AWS Batch with S3 for input and output"
+        }
+      ],
+      "correctChoiceId": "q013-a",
+      "explanation": "Amazon Kinesis Data Streams can handle high-throughput real-time data ingestion (100,000+ events/sec). Lambda can process streams in real-time for dashboards. Kinesis Data Firehose can automatically deliver data to S3 for historical analysis, and Athena can query S3 data. This architecture provides both real-time and batch analytics capabilities. SQS has lower throughput limits. SNS is for pub/sub messaging, not stream processing. AWS Batch is for batch processing, not real-time streaming.",
+      "difficulty": "hard",
+      "tags": ["Kinesis Data Streams", "Lambda", "Kinesis Firehose", "Athena", "Real-time Analytics"]
+    },
+    {
+      "id": "q014",
+      "domain": "new-solutions",
+      "text": "A web application needs to handle sudden traffic spikes from 1,000 to 100,000 concurrent users. The application uses a relational database and requires sub-second response times. What is the MOST scalable architecture?",
+      "choices": [
+        {
+          "id": "q014-a",
+          "text": "Application Load Balancer with Auto Scaling EC2 instances, Amazon ElastiCache for caching, and Amazon Aurora with read replicas"
+        },
+        {
+          "id": "q014-b",
+          "text": "Network Load Balancer with fixed number of EC2 instances and RDS Multi-AZ"
+        },
+        {
+          "id": "q014-c",
+          "text": "CloudFront with Lambda@Edge and DynamoDB"
+        },
+        {
+          "id": "q014-d",
+          "text": "API Gateway with Lambda and RDS Proxy"
+        }
+      ],
+      "correctChoiceId": "q014-a",
+      "explanation": "Application Load Balancer with Auto Scaling can handle traffic spikes by automatically adding/removing EC2 instances. ElastiCache reduces database load by caching frequently accessed data, ensuring sub-second response times. Aurora with read replicas provides scalable read capacity for the relational database. This architecture can scale from 1,000 to 100,000 users. Fixed EC2 instances can't handle spikes. While Lambda scales automatically, RDS Proxy doesn't solve the relational database requirement as effectively as Aurora with read replicas.",
+      "difficulty": "hard",
+      "tags": ["Auto Scaling", "ElastiCache", "Aurora", "Read Replicas", "High Availability"]
+    },
+    {
+      "id": "q015",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a disaster recovery solution for their critical application with RTO of 4 hours and RPO of 1 hour. The application uses EC2 instances, RDS databases, and S3 storage. What is the MOST cost-effective DR strategy?",
+      "choices": [
+        {
+          "id": "q015-a",
+          "text": "Pilot Light with automated RDS snapshots, S3 cross-region replication, and CloudFormation templates for infrastructure"
+        },
+        {
+          "id": "q015-b",
+          "text": "Warm Standby with running EC2 instances and RDS read replicas in DR region"
+        },
+        {
+          "id": "q015-c",
+          "text": "Backup and Restore using AWS Backup with 4-hour backup frequency"
+        },
+        {
+          "id": "q015-d",
+          "text": "Multi-Site Active-Active with full capacity in both regions"
+        }
+      ],
+      "correctChoiceId": "q015-a",
+      "explanation": "Pilot Light maintains minimal infrastructure (just data replication) and can meet the 4-hour RTO by launching resources from CloudFormation templates when needed. Automated RDS snapshots every hour meet the 1-hour RPO. S3 cross-region replication ensures data availability. This is more cost-effective than Warm Standby or Multi-Site Active-Active. Backup and Restore with 4-hour frequency can't meet the 1-hour RPO requirement.",
+      "difficulty": "hard",
+      "tags": ["Disaster Recovery", "Pilot Light", "RTO", "RPO", "Cost Optimization"]
+    },
+    {
+      "id": "q016",
+      "domain": "new-solutions",
+      "text": "A company is designing a serverless API that needs to handle 10,000 requests per second with consistent low latency. The API performs complex calculations that take 2-3 seconds. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q016-a",
+          "text": "Amazon API Gateway with Lambda functions using Provisioned Concurrency and DynamoDB with DAX for caching"
+        },
+        {
+          "id": "q016-b",
+          "text": "API Gateway with Lambda functions and RDS database"
+        },
+        {
+          "id": "q016-c",
+          "text": "Application Load Balancer with ECS Fargate containers"
+        },
+        {
+          "id": "q016-d",
+          "text": "CloudFront with Lambda@Edge and S3"
+        }
+      ],
+      "correctChoiceId": "q016-a",
+      "explanation": "API Gateway can handle 10,000 requests per second. Lambda with Provisioned Concurrency eliminates cold starts, ensuring consistent low latency. DynamoDB can handle high throughput, and DAX (DynamoDB Accelerator) provides microsecond latency for cached reads. This serverless architecture meets all requirements. While ECS Fargate is also viable, it's not serverless. Lambda@Edge is for edge computing, not complex calculations. RDS may struggle with 10,000 req/sec without proper scaling.",
+      "difficulty": "hard",
+      "tags": ["API Gateway", "Lambda", "Provisioned Concurrency", "DynamoDB", "DAX", "Serverless"]
+    },
+    {
+      "id": "q017",
+      "domain": "new-solutions",
+      "text": "A media company needs to store and serve video files to users worldwide with low latency. Videos are uploaded frequently and must be available immediately. What is the MOST appropriate architecture?",
+      "choices": [
+        {
+          "id": "q017-a",
+          "text": "Amazon S3 with CloudFront distribution and Origin Access Identity (OAI) for security"
+        },
+        {
+          "id": "q017-b",
+          "text": "Amazon EFS with EC2 instances in multiple regions"
+        },
+        {
+          "id": "q017-c",
+          "text": "Amazon EBS volumes with snapshots copied to multiple regions"
+        },
+        {
+          "id": "q017-d",
+          "text": "Amazon FSx for Lustre with Direct Connect"
+        }
+      ],
+      "correctChoiceId": "q017-a",
+      "explanation": "Amazon S3 provides durable, scalable object storage for video files. CloudFront is a global CDN that caches content at edge locations worldwide, providing low latency access. Origin Access Identity (OAI) ensures that content can only be accessed through CloudFront, not directly from S3. This architecture is designed for this exact use case. EFS is for file systems, not object storage. EBS is for block storage attached to EC2. FSx for Lustre is for high-performance computing workloads.",
+      "difficulty": "medium",
+      "tags": ["S3", "CloudFront", "CDN", "OAI", "Media Delivery"]
+    },
+    {
+      "id": "q018",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a CI/CD pipeline that automatically tests, builds, and deploys containerized applications to ECS. The pipeline must support multiple environments (dev, staging, prod) with approval gates. What services should they use?",
+      "choices": [
+        {
+          "id": "q018-a",
+          "text": "AWS CodePipeline with CodeBuild for building containers, CodeDeploy for ECS deployments, and manual approval actions between stages"
+        },
+        {
+          "id": "q018-b",
+          "text": "Jenkins on EC2 with custom scripts for deployment"
+        },
+        {
+          "id": "q018-c",
+          "text": "AWS CloudFormation with nested stacks"
+        },
+        {
+          "id": "q018-d",
+          "text": "AWS Elastic Beanstalk with Docker platform"
+        }
+      ],
+      "correctChoiceId": "q018-a",
+      "explanation": "AWS CodePipeline orchestrates the CI/CD workflow. CodeBuild can build Docker containers and run tests. CodeDeploy supports ECS deployments with blue/green capabilities. CodePipeline supports manual approval actions between stages for controlled promotions to production. This is a fully managed, AWS-native solution. While Jenkins works, it requires management. CloudFormation is for infrastructure, not CI/CD. Elastic Beanstalk doesn't provide the same level of pipeline control.",
+      "difficulty": "medium",
+      "tags": ["CodePipeline", "CodeBuild", "CodeDeploy", "ECS", "CI/CD", "Containers"]
+    },
+    {
+      "id": "q019",
+      "domain": "new-solutions",
+      "text": "A SaaS application needs to isolate customer data at the database level while maintaining cost efficiency. Each customer's data must be encrypted with their own encryption key. What is the BEST database architecture?",
+      "choices": [
+        {
+          "id": "q019-a",
+          "text": "Amazon RDS with separate database instances per customer and customer-managed KMS keys"
+        },
+        {
+          "id": "q019-b",
+          "text": "Amazon Aurora with separate schemas per customer and application-level encryption"
+        },
+        {
+          "id": "q019-c",
+          "text": "Amazon DynamoDB with separate tables per customer and KMS encryption"
+        },
+        {
+          "id": "q019-d",
+          "text": "Amazon Redshift with separate databases per customer"
+        }
+      ],
+      "correctChoiceId": "q019-b",
+      "explanation": "Amazon Aurora with separate schemas per customer provides logical isolation while sharing infrastructure for cost efficiency. Application-level encryption using customer-specific KMS keys ensures each customer's data is encrypted with their own key. This is more cost-effective than separate RDS instances per customer. While DynamoDB with separate tables works, Aurora is better for relational data. Redshift is for analytics, not transactional workloads. Separate RDS instances per customer is expensive and doesn't scale well.",
+      "difficulty": "hard",
+      "tags": ["Aurora", "Multi-Tenancy", "Data Isolation", "KMS", "SaaS"]
+    },
+    {
+      "id": "q020",
+      "domain": "new-solutions",
+      "text": "A company is building a mobile application that requires user authentication, authorization, and the ability to sync user data across devices. They want a fully managed solution. What AWS services should they use?",
+      "choices": [
+        {
+          "id": "q020-a",
+          "text": "Amazon Cognito for authentication and authorization, AWS AppSync for data synchronization"
+        },
+        {
+          "id": "q020-b",
+          "text": "AWS IAM for authentication and DynamoDB for data storage"
+        },
+        {
+          "id": "q020-c",
+          "text": "Amazon API Gateway with Lambda authorizers and S3 for data storage"
+        },
+        {
+          "id": "q020-d",
+          "text": "AWS Directory Service and RDS for user data"
+        }
+      ],
+      "correctChoiceId": "q020-a",
+      "explanation": "Amazon Cognito provides user authentication, authorization, and user management for mobile and web applications. AWS AppSync is a fully managed GraphQL service that provides real-time data synchronization across devices with offline support. This combination is specifically designed for mobile applications. IAM is for AWS resource access, not end-user authentication. API Gateway with Lambda authorizers requires more custom development. Directory Service is for enterprise directory integration, not mobile apps.",
+      "difficulty": "medium",
+      "tags": ["Cognito", "AppSync", "Mobile", "Authentication", "Data Sync"]
+    }
+,
+    {
+      "id": "q021",
+      "domain": "continuous-improvement",
+      "text": "A company's application is experiencing intermittent performance issues. They need to identify the root cause by analyzing request traces across multiple microservices. What AWS service should they implement?",
+      "choices": [
+        {
+          "id": "q021-a",
+          "text": "AWS X-Ray for distributed tracing across microservices"
+        },
+        {
+          "id": "q021-b",
+          "text": "Amazon CloudWatch Logs with log aggregation"
+        },
+        {
+          "id": "q021-c",
+          "text": "AWS CloudTrail for API call tracking"
+        },
+        {
+          "id": "q021-d",
+          "text": "Amazon Inspector for security assessments"
+        }
+      ],
+      "correctChoiceId": "q021-a",
+      "explanation": "AWS X-Ray provides distributed tracing capabilities that allow you to track requests as they travel through your application's microservices. It creates a service map showing dependencies and latencies, making it easy to identify performance bottlenecks. CloudWatch Logs can show individual service logs but doesn't provide request tracing. CloudTrail tracks API calls to AWS services, not application requests. Inspector is for security, not performance.",
+      "difficulty": "medium",
+      "tags": ["X-Ray", "Distributed Tracing", "Performance", "Microservices"]
+    },
+    {
+      "id": "q022",
+      "domain": "continuous-improvement",
+      "text": "A company wants to optimize their EC2 costs. They have a mix of workloads with varying usage patterns. What combination of tools should they use to identify cost optimization opportunities?",
+      "choices": [
+        {
+          "id": "q022-a",
+          "text": "AWS Compute Optimizer for rightsizing recommendations, Cost Explorer for usage analysis, and AWS Trusted Advisor for best practices"
+        },
+        {
+          "id": "q022-b",
+          "text": "CloudWatch metrics and manual analysis"
+        },
+        {
+          "id": "q022-c",
+          "text": "AWS Config for resource inventory"
+        },
+        {
+          "id": "q022-d",
+          "text": "AWS Systems Manager for patch management"
+        }
+      ],
+      "correctChoiceId": "q022-a",
+      "explanation": "AWS Compute Optimizer uses machine learning to analyze historical utilization and provide rightsizing recommendations. Cost Explorer provides detailed cost and usage analysis with forecasting. Trusted Advisor checks for underutilized resources and provides cost optimization recommendations. This combination provides comprehensive cost optimization insights. CloudWatch metrics alone don't provide recommendations. Config is for compliance, not cost optimization. Systems Manager is for operations, not cost analysis.",
+      "difficulty": "medium",
+      "tags": ["Compute Optimizer", "Cost Explorer", "Trusted Advisor", "Cost Optimization"]
+    },
+    {
+      "id": "q023",
+      "domain": "continuous-improvement",
+      "text": "A company's RDS database is experiencing slow query performance during peak hours. They need to identify problematic queries and optimize database performance. What should they implement?",
+      "choices": [
+        {
+          "id": "q023-a",
+          "text": "Enable RDS Performance Insights and use Enhanced Monitoring to identify slow queries and resource bottlenecks"
+        },
+        {
+          "id": "q023-b",
+          "text": "Enable CloudWatch Logs and manually analyze database logs"
+        },
+        {
+          "id": "q023-c",
+          "text": "Use AWS X-Ray for database tracing"
+        },
+        {
+          "id": "q023-d",
+          "text": "Implement AWS Config rules for database configuration"
+        }
+      ],
+      "correctChoiceId": "q023-a",
+      "explanation": "RDS Performance Insights provides a dashboard that visualizes database load and helps identify slow queries. It shows which SQL statements are consuming the most resources. Enhanced Monitoring provides OS-level metrics with 1-second granularity. Together, they provide comprehensive database performance analysis. CloudWatch Logs requires manual analysis. X-Ray is for application tracing, not database query analysis. Config is for compliance, not performance.",
+      "difficulty": "medium",
+      "tags": ["RDS", "Performance Insights", "Enhanced Monitoring", "Database Performance"]
+    },
+    {
+      "id": "q024",
+      "domain": "continuous-improvement",
+      "text": "A company wants to implement automated security compliance checking across all AWS accounts. They need to detect security group rules that allow unrestricted access (0.0.0.0/0) and automatically remediate them. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q024-a",
+          "text": "AWS Config with managed rules for security group compliance and AWS Systems Manager Automation for remediation"
+        },
+        {
+          "id": "q024-b",
+          "text": "AWS Security Hub with manual remediation"
+        },
+        {
+          "id": "q024-c",
+          "text": "Amazon GuardDuty for threat detection"
+        },
+        {
+          "id": "q024-d",
+          "text": "AWS CloudTrail with Lambda for analysis"
+        }
+      ],
+      "correctChoiceId": "q024-a",
+      "explanation": "AWS Config can continuously monitor security group configurations using managed rules like 'restricted-ssh' and 'restricted-common-ports'. When non-compliant resources are detected, Config can trigger Systems Manager Automation documents to automatically remediate the issue. This provides automated compliance checking and remediation. Security Hub aggregates findings but doesn't provide automated remediation. GuardDuty detects threats, not configuration compliance. CloudTrail logs API calls but doesn't check compliance.",
+      "difficulty": "hard",
+      "tags": ["AWS Config", "Systems Manager Automation", "Security Compliance", "Remediation"]
+    },
+    {
+      "id": "q025",
+      "domain": "continuous-improvement",
+      "text": "A company's application generates large amounts of log data. They want to analyze logs in real-time to detect anomalies and security threats. What is the MOST effective solution?",
+      "choices": [
+        {
+          "id": "q025-a",
+          "text": "Amazon CloudWatch Logs Insights with CloudWatch Anomaly Detection and EventBridge for alerting"
+        },
+        {
+          "id": "q025-b",
+          "text": "Store logs in S3 and use Athena for analysis"
+        },
+        {
+          "id": "q025-c",
+          "text": "Use Amazon OpenSearch Service with manual dashboard creation"
+        },
+        {
+          "id": "q025-d",
+          "text": "Export logs to EC2 instances for processing"
+        }
+      ],
+      "correctChoiceId": "q025-a",
+      "explanation": "CloudWatch Logs Insights provides powerful query capabilities for real-time log analysis. CloudWatch Anomaly Detection uses machine learning to automatically detect unusual patterns in metrics derived from logs. EventBridge can trigger automated responses to detected anomalies. This provides real-time analysis and alerting. S3 with Athena is for batch analysis, not real-time. OpenSearch requires more management. EC2-based processing is not scalable or cost-effective.",
+      "difficulty": "medium",
+      "tags": ["CloudWatch Logs Insights", "Anomaly Detection", "EventBridge", "Real-time Analysis"]
+    },
+    {
+      "id": "q026",
+      "domain": "continuous-improvement",
+      "text": "A company wants to improve the reliability of their application by implementing chaos engineering practices. They need to test how their application handles various failure scenarios. What AWS service should they use?",
+      "choices": [
+        {
+          "id": "q026-a",
+          "text": "AWS Fault Injection Simulator (FIS) to inject controlled failures and test application resilience"
+        },
+        {
+          "id": "q026-b",
+          "text": "AWS Systems Manager to manually stop instances"
+        },
+        {
+          "id": "q026-c",
+          "text": "AWS CloudFormation to delete and recreate resources"
+        },
+        {
+          "id": "q026-d",
+          "text": "Amazon Inspector for vulnerability scanning"
+        }
+      ],
+      "correctChoiceId": "q026-a",
+      "explanation": "AWS Fault Injection Simulator (FIS) is specifically designed for chaos engineering. It allows you to inject controlled failures (like stopping instances, throttling API calls, or injecting network latency) to test your application's resilience. FIS provides pre-built experiment templates and safety mechanisms. Systems Manager can stop instances but doesn't provide experiment orchestration. CloudFormation is for infrastructure management. Inspector is for security, not resilience testing.",
+      "difficulty": "medium",
+      "tags": ["Fault Injection Simulator", "Chaos Engineering", "Resilience", "Testing"]
+    },
+    {
+      "id": "q027",
+      "domain": "continuous-improvement",
+      "text": "A company's Lambda functions are experiencing cold start latency issues affecting user experience. They need to optimize Lambda performance while controlling costs. What strategies should they implement?",
+      "choices": [
+        {
+          "id": "q027-a",
+          "text": "Use Provisioned Concurrency for critical functions, optimize function code and dependencies, and implement Lambda SnapStart for Java functions"
+        },
+        {
+          "id": "q027-b",
+          "text": "Increase memory allocation for all functions"
+        },
+        {
+          "id": "q027-c",
+          "text": "Replace Lambda with EC2 instances"
+        },
+        {
+          "id": "q027-d",
+          "text": "Use Step Functions to chain Lambda invocations"
+        }
+      ],
+      "correctChoiceId": "q027-a",
+      "explanation": "Provisioned Concurrency keeps functions initialized and ready to respond in milliseconds, eliminating cold starts for critical functions. Optimizing code and reducing dependencies reduces initialization time. Lambda SnapStart (for Java) creates snapshots of initialized functions for faster startup. This combination addresses cold starts while managing costs. Simply increasing memory helps but doesn't eliminate cold starts. EC2 loses serverless benefits. Step Functions doesn't solve cold start issues.",
+      "difficulty": "hard",
+      "tags": ["Lambda", "Provisioned Concurrency", "SnapStart", "Performance Optimization", "Cold Start"]
+    },
+    {
+      "id": "q028",
+      "domain": "continuous-improvement",
+      "text": "A company wants to implement a comprehensive monitoring solution that provides unified visibility across their AWS infrastructure, applications, and on-premises resources. What should they use?",
+      "choices": [
+        {
+          "id": "q028-a",
+          "text": "Amazon CloudWatch with CloudWatch Application Insights, CloudWatch ServiceLens, and CloudWatch Agent for on-premises monitoring"
+        },
+        {
+          "id": "q028-b",
+          "text": "AWS X-Ray only for distributed tracing"
+        },
+        {
+          "id": "q028-c",
+          "text": "AWS Config for resource monitoring"
+        },
+        {
+          "id": "q028-d",
+          "text": "Amazon Inspector for infrastructure assessment"
+        }
+      ],
+      "correctChoiceId": "q028-a",
+      "explanation": "CloudWatch provides unified monitoring for AWS and on-premises resources. Application Insights automatically discovers application components and sets up monitoring. ServiceLens integrates X-Ray traces with CloudWatch metrics and logs for end-to-end visibility. CloudWatch Agent collects metrics from on-premises servers. This provides comprehensive observability. X-Ray alone doesn't provide infrastructure monitoring. Config is for compliance. Inspector is for security assessments.",
+      "difficulty": "hard",
+      "tags": ["CloudWatch", "Application Insights", "ServiceLens", "Observability", "Hybrid Monitoring"]
+    },
+    {
+      "id": "q029",
+      "domain": "continuous-improvement",
+      "text": "A company's S3 storage costs are growing rapidly. They need to optimize storage costs while maintaining data accessibility requirements. What is the MOST cost-effective approach?",
+      "choices": [
+        {
+          "id": "q029-a",
+          "text": "Implement S3 Intelligent-Tiering for automatic cost optimization, use S3 Storage Lens for visibility, and create lifecycle policies for archival"
+        },
+        {
+          "id": "q029-b",
+          "text": "Manually move objects to Glacier based on age"
+        },
+        {
+          "id": "q029-c",
+          "text": "Delete old objects to free up space"
+        },
+        {
+          "id": "q029-d",
+          "text": "Compress all objects before uploading"
+        }
+      ],
+      "correctChoiceId": "q029-a",
+      "explanation": "S3 Intelligent-Tiering automatically moves objects between access tiers based on usage patterns, optimizing costs without performance impact. S3 Storage Lens provides organization-wide visibility into storage usage and activity. Lifecycle policies can automatically transition objects to cheaper storage classes or Glacier for archival. This combination provides automated, intelligent cost optimization. Manual moves don't scale. Deleting data may violate retention requirements. Compression helps but doesn't address storage class optimization.",
+      "difficulty": "medium",
+      "tags": ["S3", "Intelligent-Tiering", "Storage Lens", "Lifecycle Policies", "Cost Optimization"]
+    },
+    {
+      "id": "q030",
+      "domain": "continuous-improvement",
+      "text": "A company wants to improve their incident response time by implementing automated remediation for common issues. They need to detect issues and automatically execute remediation workflows. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q030-a",
+          "text": "Amazon EventBridge to detect events, AWS Systems Manager Automation for remediation workflows, and SNS for notifications"
+        },
+        {
+          "id": "q030-b",
+          "text": "CloudWatch Alarms with Lambda functions for remediation"
+        },
+        {
+          "id": "q030-c",
+          "text": "AWS Config with manual remediation"
+        },
+        {
+          "id": "q030-d",
+          "text": "AWS CloudTrail with S3 event notifications"
+        }
+      ],
+      "correctChoiceId": "q030-a",
+      "explanation": "Amazon EventBridge can detect events from various AWS services and custom applications. Systems Manager Automation provides pre-built and custom runbooks for remediation workflows with approval gates and error handling. SNS provides notifications to teams. This architecture enables event-driven automated remediation. While CloudWatch Alarms with Lambda works, Systems Manager Automation provides better workflow orchestration. Config detects compliance issues but EventBridge provides broader event detection. CloudTrail is for auditing, not real-time event processing.",
+      "difficulty": "hard",
+      "tags": ["EventBridge", "Systems Manager Automation", "SNS", "Automated Remediation", "Incident Response"]
+    },
+    {
+      "id": "q031",
+      "domain": "migration-modernization",
+      "text": "A company is planning to migrate a large on-premises Oracle database to AWS. They need to minimize downtime and want to assess the migration complexity. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q031-a",
+          "text": "Use AWS Schema Conversion Tool (SCT) to assess compatibility, then AWS Database Migration Service (DMS) with Change Data Capture (CDC) for minimal downtime migration"
+        },
+        {
+          "id": "q031-b",
+          "text": "Export database to files and import into RDS"
+        },
+        {
+          "id": "q031-c",
+          "text": "Use AWS DataSync to copy database files"
+        },
+        {
+          "id": "q031-d",
+          "text": "Manually rewrite application to use DynamoDB"
+        }
+      ],
+      "correctChoiceId": "q031-a",
+      "explanation": "AWS Schema Conversion Tool (SCT) analyzes the source database and provides a detailed assessment report of migration complexity, including schema conversion requirements. AWS DMS can perform the actual migration with Change Data Capture (CDC) to keep the source and target databases in sync, minimizing downtime. This is the recommended approach for database migrations. Export/import requires significant downtime. DataSync is for file transfers, not database migration. Rewriting to DynamoDB is a major refactoring effort.",
+      "difficulty": "medium",
+      "tags": ["Database Migration", "SCT", "DMS", "Oracle", "CDC"]
+    },
+    {
+      "id": "q032",
+      "domain": "migration-modernization",
+      "text": "A company wants to migrate 500 TB of data from their on-premises data center to S3. They have a 1 Gbps internet connection but need to complete the migration within 2 weeks. What is the MOST appropriate solution?",
+      "choices": [
+        {
+          "id": "q032-a",
+          "text": "Use AWS Snowball Edge devices to physically transfer the data"
+        },
+        {
+          "id": "q032-b",
+          "text": "Use AWS DataSync over the internet"
+        },
+        {
+          "id": "q032-c",
+          "text": "Use AWS Transfer Family with SFTP"
+        },
+        {
+          "id": "q032-d",
+          "text": "Use S3 multipart upload over the internet"
+        }
+      ],
+      "correctChoiceId": "q032-a",
+      "explanation": "Transferring 500 TB over a 1 Gbps connection would take approximately 46 days (500 TB * 8 bits/byte / 1 Gbps / 86400 seconds/day), which exceeds the 2-week requirement. AWS Snowball Edge devices can physically transfer large amounts of data much faster. Multiple Snowball devices can be used in parallel. DataSync over internet would face the same bandwidth limitation. Transfer Family and S3 multipart upload don't solve the bandwidth constraint.",
+      "difficulty": "medium",
+      "tags": ["Data Migration", "Snowball", "Large Data Transfer", "S3"]
+    },
+    {
+      "id": "q033",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a monolithic application to AWS and wants to modernize it using microservices. They want to minimize changes to the application code initially. What migration strategy should they use?",
+      "choices": [
+        {
+          "id": "q033-a",
+          "text": "Rehost (lift-and-shift) to EC2 initially, then gradually refactor to microservices using containers"
+        },
+        {
+          "id": "q033-b",
+          "text": "Immediately refactor the entire application to Lambda functions"
+        },
+        {
+          "id": "q033-c",
+          "text": "Replatform to Elastic Beanstalk and leave as monolith"
+        },
+        {
+          "id": "q033-d",
+          "text": "Retire the application and build new from scratch"
+        }
+      ],
+      "correctChoiceId": "q033-a",
+      "explanation": "The Rehost (lift-and-shift) strategy allows quick migration to AWS with minimal code changes, providing immediate cloud benefits. Once running on AWS, the application can be gradually refactored into microservices using containers (ECS/EKS) in a phased approach. This minimizes risk and allows learning. Immediate refactoring to Lambda is high-risk and time-consuming. Replatforming to Elastic Beanstalk doesn't address modernization. Retiring and rebuilding is expensive and risky.",
+      "difficulty": "medium",
+      "tags": ["Migration Strategy", "6Rs", "Rehost", "Refactor", "Microservices", "Modernization"]
+    },
+    {
+      "id": "q034",
+      "domain": "migration-modernization",
+      "text": "A company is migrating VMware workloads to AWS. They want to maintain their existing VMware management tools and processes. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q034-a",
+          "text": "Use VMware Cloud on AWS to run VMware workloads natively on AWS infrastructure"
+        },
+        {
+          "id": "q034-b",
+          "text": "Convert VMs to AMIs and run on EC2"
+        },
+        {
+          "id": "q034-c",
+          "text": "Use AWS Application Migration Service to migrate to EC2"
+        },
+        {
+          "id": "q034-d",
+          "text": "Manually rebuild applications on AWS"
+        }
+      ],
+      "correctChoiceId": "q034-a",
+      "explanation": "VMware Cloud on AWS provides a fully managed VMware environment running on AWS infrastructure. It allows you to use the same VMware tools (vCenter, vSphere, etc.) and processes you use on-premises, making migration seamless. You can also integrate with native AWS services. Converting to AMIs requires changes to management processes. Application Migration Service is for general server migrations, not VMware-specific. Manual rebuilding is time-consuming and risky.",
+      "difficulty": "medium",
+      "tags": ["VMware Cloud on AWS", "VMware Migration", "Hybrid Cloud"]
+    },
+    {
+      "id": "q035",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a legacy application that uses a commercial database with expensive licensing. They want to reduce costs by moving to an open-source database. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q035-a",
+          "text": "Use AWS Schema Conversion Tool to convert to Amazon Aurora PostgreSQL, then AWS DMS for data migration"
+        },
+        {
+          "id": "q035-b",
+          "text": "Manually rewrite all database queries"
+        },
+        {
+          "id": "q035-c",
+          "text": "Keep the commercial database on RDS"
+        },
+        {
+          "id": "q035-d",
+          "text": "Export data to CSV and import to DynamoDB"
+        }
+      ],
+      "correctChoiceId": "q035-a",
+      "explanation": "AWS Schema Conversion Tool (SCT) can automatically convert database schemas and application code from commercial databases to open-source alternatives like Aurora PostgreSQL. AWS DMS then migrates the data with minimal downtime. Aurora PostgreSQL is compatible with PostgreSQL and provides enterprise features at lower cost. Manual rewriting is time-consuming and error-prone. Keeping the commercial database doesn't reduce costs. DynamoDB is a different data model and requires application rewrite.",
+      "difficulty": "hard",
+      "tags": ["Database Migration", "SCT", "DMS", "Aurora PostgreSQL", "Cost Optimization", "Heterogeneous Migration"]
+    },
+    {
+      "id": "q036",
+      "domain": "migration-modernization",
+      "text": "A company wants to migrate their on-premises file servers to AWS. Users need to access files using SMB protocol, and the solution must integrate with Active Directory. What is the MOST appropriate service?",
+      "choices": [
+        {
+          "id": "q036-a",
+          "text": "Amazon FSx for Windows File Server with Active Directory integration"
+        },
+        {
+          "id": "q036-b",
+          "text": "Amazon EFS with NFS protocol"
+        },
+        {
+          "id": "q036-c",
+          "text": "Amazon S3 with S3 File Gateway"
+        },
+        {
+          "id": "q036-d",
+          "text": "Amazon EBS volumes shared across instances"
+        }
+      ],
+      "correctChoiceId": "q036-a",
+      "explanation": "Amazon FSx for Windows File Server provides fully managed Windows file servers with native SMB protocol support and Active Directory integration. It's designed as a drop-in replacement for on-premises Windows file servers. EFS uses NFS, not SMB. S3 File Gateway provides file interface to S3 but doesn't offer the same Windows file server features. EBS volumes can't be shared across instances without clustering.",
+      "difficulty": "medium",
+      "tags": ["FSx for Windows", "File Migration", "SMB", "Active Directory"]
+    },
+    {
+      "id": "q037",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a web application that currently runs on physical servers. They want to containerize the application and use a managed container orchestration service. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q037-a",
+          "text": "Containerize the application using Docker, then deploy to Amazon ECS with Fargate for serverless container management"
+        },
+        {
+          "id": "q037-b",
+          "text": "Keep the application on EC2 instances without containerization"
+        },
+        {
+          "id": "q037-c",
+          "text": "Rewrite the application as Lambda functions"
+        },
+        {
+          "id": "q037-d",
+          "text": "Use Elastic Beanstalk with the default platform"
+        }
+      ],
+      "correctChoiceId": "q037-a",
+      "explanation": "Containerizing with Docker provides portability and consistency. Amazon ECS with Fargate offers managed container orchestration without managing servers. Fargate automatically handles infrastructure provisioning, scaling, and patching. This modernizes the application while minimizing operational overhead. Keeping on EC2 doesn't modernize. Lambda requires significant refactoring. Elastic Beanstalk default platform doesn't provide container benefits.",
+      "difficulty": "medium",
+      "tags": ["Containers", "Docker", "ECS", "Fargate", "Modernization"]
+    },
+    {
+      "id": "q038",
+      "domain": "migration-modernization",
+      "text": "A company is planning a large-scale migration of 1000+ servers to AWS. They need to discover server dependencies, group servers into applications, and plan the migration. What AWS service should they use?",
+      "choices": [
+        {
+          "id": "q038-a",
+          "text": "AWS Application Discovery Service to discover servers and dependencies, then AWS Migration Hub to track and plan the migration"
+        },
+        {
+          "id": "q038-b",
+          "text": "Manually document all servers and dependencies"
+        },
+        {
+          "id": "q038-c",
+          "text": "Use AWS Systems Manager to inventory servers"
+        },
+        {
+          "id": "q038-d",
+          "text": "Use AWS Config to track resources"
+        }
+      ],
+      "correctChoiceId": "q038-a",
+      "explanation": "AWS Application Discovery Service automatically discovers on-premises servers, their configurations, and dependencies using agents or agentless discovery. It can group servers into applications based on network connections. AWS Migration Hub provides a central location to track migration progress across multiple AWS and partner tools. This combination is designed for large-scale migrations. Manual documentation doesn't scale. Systems Manager is for AWS resources. Config is for compliance, not migration planning.",
+      "difficulty": "medium",
+      "tags": ["Application Discovery Service", "Migration Hub", "Large-Scale Migration", "Discovery"]
+    },
+    {
+      "id": "q039",
+      "domain": "migration-modernization",
+      "text": "A company wants to migrate their mainframe applications to AWS. The applications are written in COBOL and use VSAM files. What is the BEST modernization approach?",
+      "choices": [
+        {
+          "id": "q039-a",
+          "text": "Use AWS Mainframe Modernization service to replatform COBOL applications to managed runtime or refactor to modern languages"
+        },
+        {
+          "id": "q039-b",
+          "text": "Manually rewrite all applications in Java"
+        },
+        {
+          "id": "q039-c",
+          "text": "Keep mainframe on-premises and connect via Direct Connect"
+        },
+        {
+          "id": "q039-d",
+          "text": "Convert COBOL to Lambda functions"
+        }
+      ],
+      "correctChoiceId": "q039-a",
+      "explanation": "AWS Mainframe Modernization provides two patterns: replatform (run COBOL applications on managed runtime with minimal changes) or refactor (convert to modern languages using automated tools). It handles VSAM file conversion and provides mainframe-compatible services. This is specifically designed for mainframe modernization. Manual rewriting is expensive and risky. Keeping on-premises doesn't modernize. Lambda is not suitable for COBOL applications.",
+      "difficulty": "hard",
+      "tags": ["Mainframe Modernization", "COBOL", "Legacy Migration", "Replatform", "Refactor"]
+    },
+    {
+      "id": "q040",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a multi-tier application to AWS. They want to use AWS Application Migration Service (MGN) for the migration. What is the correct migration process?",
+      "choices": [
+        {
+          "id": "q040-a",
+          "text": "Install AWS Replication Agent on source servers, configure replication settings, test in staging, then cutover to production"
+        },
+        {
+          "id": "q040-b",
+          "text": "Create AMIs manually and launch EC2 instances"
+        },
+        {
+          "id": "q040-c",
+          "text": "Use AWS DataSync to copy application files"
+        },
+        {
+          "id": "q040-d",
+          "text": "Export VMs and import to EC2"
+        }
+      ],
+      "correctChoiceId": "q040-a",
+      "tags": ["Application Migration Service", "MGN", "Lift-and-Shift", "Replication", "Cutover"]
+    }
+,
+    {
+      "id": "q041",
+      "domain": "complex-organizations",
+      "text": "A global enterprise with 200+ AWS accounts needs to implement a centralized security monitoring solution. They require real-time threat detection, automated compliance checking, and centralized security findings across all accounts and regions. What is the MOST comprehensive solution?",
+      "choices": [
+        {
+          "id": "q041-a",
+          "text": "Enable AWS Security Hub as the central aggregator, integrate GuardDuty for threat detection, AWS Config for compliance, and Macie for data protection across all accounts"
+        },
+        {
+          "id": "q041-b",
+          "text": "Use CloudWatch Logs with Lambda for security analysis"
+        },
+        {
+          "id": "q041-c",
+          "text": "Deploy third-party SIEM on EC2 instances"
+        },
+        {
+          "id": "q041-d",
+          "text": "Use AWS CloudTrail with S3 bucket analysis"
+        }
+      ],
+      "correctChoiceId": "q041-a",
+      "explanation": "AWS Security Hub provides centralized security and compliance monitoring across multiple accounts and regions. It aggregates findings from GuardDuty (threat detection), AWS Config (compliance), Macie (sensitive data discovery), Inspector (vulnerability assessment), and other services. Security Hub also provides automated compliance checks against standards like CIS AWS Foundations Benchmark. This provides comprehensive, integrated security monitoring. CloudWatch Logs requires custom development. Third-party SIEM requires management and integration. CloudTrail alone doesn't provide threat detection or compliance checking.",
+      "difficulty": "hard",
+      "tags": ["Security Hub", "GuardDuty", "AWS Config", "Macie", "Multi-Account Security", "Compliance"]
+    },
+    {
+      "id": "q042",
+      "domain": "complex-organizations",
+      "text": "A financial services company needs to implement network segmentation across 50 AWS accounts with strict traffic inspection requirements. They need to inspect all traffic between VPCs, to the internet, and to on-premises networks. What is the MOST secure and scalable architecture?",
+      "choices": [
+        {
+          "id": "q042-a",
+          "text": "Deploy AWS Transit Gateway with centralized AWS Network Firewall in an inspection VPC, route all traffic through the firewall using Transit Gateway route tables"
+        },
+        {
+          "id": "q042-b",
+          "text": "Use VPC Peering with security groups for traffic control"
+        },
+        {
+          "id": "q042-c",
+          "text": "Deploy third-party firewall appliances in each VPC"
+        },
+        {
+          "id": "q042-d",
+          "text": "Use Network ACLs for traffic filtering"
+        }
+      ],
+      "correctChoiceId": "q042-a",
+      "explanation": "AWS Transit Gateway provides centralized connectivity for multiple VPCs. By deploying AWS Network Firewall in a dedicated inspection VPC and configuring Transit Gateway route tables to route all traffic through this VPC, you can inspect all inter-VPC, internet-bound, and on-premises traffic. Network Firewall provides stateful inspection, intrusion prevention, and web filtering. This architecture scales to hundreds of VPCs. VPC Peering doesn't support transitive routing or centralized inspection. Third-party appliances in each VPC don't scale and are expensive. Network ACLs are stateless and don't provide deep packet inspection.",
+      "difficulty": "hard",
+      "tags": ["Transit Gateway", "Network Firewall", "Inspection VPC", "Network Segmentation", "Security"]
+    },
+    {
+      "id": "q043",
+      "domain": "complex-organizations",
+      "text": "A company operates in multiple countries and needs to comply with data residency requirements. They must ensure that data from EU customers never leaves EU regions, while maintaining a unified global application architecture. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q043-a",
+          "text": "Use Route 53 geolocation routing to direct users to region-specific endpoints, implement separate Aurora Global Database clusters per region with no cross-region replication for EU data, and use S3 bucket policies to prevent cross-region replication"
+        },
+        {
+          "id": "q043-b",
+          "text": "Deploy separate applications in each region with no integration"
+        },
+        {
+          "id": "q043-c",
+          "text": "Use a single global database with data encryption"
+        },
+        {
+          "id": "q043-d",
+          "text": "Store all data in one region and use CloudFront for global access"
+        }
+      ],
+      "correctChoiceId": "q043-a",
+      "explanation": "Route 53 geolocation routing directs users to the nearest compliant region. Aurora Global Database allows you to have separate database clusters per region without cross-region replication for sensitive data, while still maintaining a unified architecture for non-sensitive data. S3 bucket policies can enforce data residency by preventing cross-region replication. This provides data sovereignty while maintaining application consistency. Separate applications create management overhead. A single global database violates data residency. CloudFront caching doesn't solve data residency for origin data.",
+      "difficulty": "hard",
+      "tags": ["Data Residency", "GDPR", "Route 53", "Aurora Global Database", "Compliance", "Multi-Region"]
+    },
+    {
+      "id": "q044",
+      "domain": "complex-organizations",
+      "text": "An organization wants to implement a landing zone for new AWS accounts with pre-configured networking, security baselines, and compliance controls. New accounts should be automatically configured when created. What is the MOST efficient solution?",
+      "choices": [
+        {
+          "id": "q044-a",
+          "text": "Use AWS Control Tower to set up a landing zone with Account Factory, Service Catalog for account vending, and CloudFormation StackSets for baseline configurations"
+        },
+        {
+          "id": "q044-b",
+          "text": "Manually configure each new account"
+        },
+        {
+          "id": "q044-c",
+          "text": "Use AWS Organizations with manual CloudFormation deployment"
+        },
+        {
+          "id": "q044-d",
+          "text": "Create a master AMI with all configurations"
+        }
+      ],
+      "correctChoiceId": "q044-a",
+      "explanation": "AWS Control Tower provides a landing zone with pre-configured best practices for multi-account environments. Account Factory automates account provisioning with baseline configurations. Service Catalog allows self-service account creation with governance. CloudFormation StackSets deploy resources across multiple accounts automatically. Control Tower also provides guardrails (SCPs and AWS Config rules) for ongoing governance. This provides automated, consistent account setup. Manual configuration doesn't scale. Organizations alone doesn't provide automation. AMIs are for EC2 instances, not account configuration.",
+      "difficulty": "medium",
+      "tags": ["Control Tower", "Landing Zone", "Account Factory", "Service Catalog", "StackSets", "Automation"]
+    },
+    {
+      "id": "q045",
+      "domain": "complex-organizations",
+      "text": "A company needs to implement a hybrid DNS solution that allows on-premises resources to resolve AWS resource names and AWS resources to resolve on-premises names. They have multiple VPCs and an on-premises Active Directory. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q045-a",
+          "text": "Use Route 53 Resolver with inbound and outbound endpoints, configure forwarding rules to on-premises DNS, and integrate with AWS Directory Service for Active Directory"
+        },
+        {
+          "id": "q045-b",
+          "text": "Manually maintain hosts files on all servers"
+        },
+        {
+          "id": "q045-c",
+          "text": "Use only on-premises DNS servers"
+        },
+        {
+          "id": "q045-d",
+          "text": "Deploy BIND DNS servers on EC2 instances"
+        }
+      ],
+      "correctChoiceId": "q045-a",
+      "explanation": "Route 53 Resolver provides hybrid DNS resolution. Inbound endpoints allow on-premises resources to resolve AWS resource names. Outbound endpoints and forwarding rules allow AWS resources to resolve on-premises names. Integration with AWS Directory Service provides seamless Active Directory DNS integration. This provides bidirectional DNS resolution. Hosts files don't scale. Using only on-premises DNS doesn't provide AWS-native resolution. BIND on EC2 requires management and doesn't integrate as well with AWS services.",
+      "difficulty": "hard",
+      "tags": ["Route 53 Resolver", "Hybrid DNS", "Active Directory", "Directory Service", "Hybrid Cloud"]
+    },
+    {
+      "id": "q046",
+      "domain": "complex-organizations",
+      "text": "A company with 100+ AWS accounts wants to implement centralized VPC IP address management (IPAM) to prevent IP address conflicts and ensure efficient IP address utilization. What should they use?",
+      "choices": [
+        {
+          "id": "q046-a",
+          "text": "AWS VPC IP Address Manager (IPAM) to create IP pools, define allocation rules, and monitor IP address usage across all accounts"
+        },
+        {
+          "id": "q046-b",
+          "text": "Maintain a spreadsheet of IP address allocations"
+        },
+        {
+          "id": "q046-c",
+          "text": "Use AWS Config to track VPC CIDR blocks"
+        },
+        {
+          "id": "q046-d",
+          "text": "Deploy third-party IPAM software on EC2"
+        }
+      ],
+      "correctChoiceId": "q046-a",
+      "explanation": "AWS VPC IP Address Manager (IPAM) provides centralized IP address management across multiple accounts and regions. It allows you to create IP pools with allocation rules, automatically tracks IP address usage, detects overlapping CIDR blocks, and provides compliance monitoring. IPAM integrates with AWS Organizations for multi-account management. This provides automated, scalable IP address management. Spreadsheets don't scale and are error-prone. Config can track but doesn't provide allocation management. Third-party software requires management and integration.",
+      "difficulty": "medium",
+      "tags": ["VPC IPAM", "IP Address Management", "Multi-Account", "Network Planning"]
+    },
+    {
+      "id": "q047",
+      "domain": "complex-organizations",
+      "text": "A global company needs to implement a disaster recovery strategy for their multi-region application with an RTO of 30 minutes and RPO of 5 minutes. The application uses Aurora databases, EC2 instances, and S3 storage. What is the MOST appropriate architecture?",
+      "choices": [
+        {
+          "id": "q047-a",
+          "text": "Use Aurora Global Database with cross-region read replicas, EC2 Auto Scaling groups with AMIs in DR region, S3 Cross-Region Replication, and Route 53 health checks for automatic failover"
+        },
+        {
+          "id": "q047-b",
+          "text": "Take hourly snapshots and restore in DR region when needed"
+        },
+        {
+          "id": "q047-c",
+          "text": "Use AWS Backup with daily backups"
+        },
+        {
+          "id": "q047-d",
+          "text": "Manually copy data to DR region weekly"
+        }
+      ],
+      "correctChoiceId": "q047-a",
+      "explanation": "Aurora Global Database provides cross-region replication with typically less than 1 second of replication lag, meeting the 5-minute RPO. It supports fast failover (typically under 1 minute). EC2 Auto Scaling groups with pre-configured AMIs in the DR region can launch instances quickly. S3 Cross-Region Replication provides near real-time replication. Route 53 health checks enable automatic DNS failover. This architecture can meet both RTO and RPO requirements. Hourly snapshots can't meet 5-minute RPO. Daily backups are too infrequent. Weekly manual copies are inadequate for these requirements.",
+      "difficulty": "hard",
+      "tags": ["Disaster Recovery", "Aurora Global Database", "Multi-Region", "RTO", "RPO", "Automatic Failover"]
+    },
+    {
+      "id": "q048",
+      "domain": "complex-organizations",
+      "text": "A company needs to implement a cost allocation strategy that tracks costs by project, environment (dev/staging/prod), and cost center. They want to enforce tagging and generate detailed cost reports. What is the MOST comprehensive solution?",
+      "choices": [
+        {
+          "id": "q048-a",
+          "text": "Implement AWS Tag Policies in Organizations to enforce required tags, activate Cost Allocation Tags, use AWS Cost Categories for grouping, and create Cost and Usage Reports with Athena for analysis"
+        },
+        {
+          "id": "q048-b",
+          "text": "Manually tag resources and use Cost Explorer"
+        },
+        {
+          "id": "q048-c",
+          "text": "Use separate AWS accounts for each project"
+        },
+        {
+          "id": "q048-d",
+          "text": "Export billing data to Excel for analysis"
+        }
+      ],
+      "correctChoiceId": "q048-a",
+      "explanation": "AWS Tag Policies in Organizations enforce consistent tagging across all accounts. Cost Allocation Tags make tags available for cost tracking. AWS Cost Categories allow you to create custom groupings (like projects or cost centers) based on tags, accounts, or services. Cost and Usage Reports provide detailed billing data that can be queried with Athena for custom analysis. This provides comprehensive, enforced cost allocation. Manual tagging isn't enforced. Separate accounts provide isolation but don't solve detailed cost allocation within accounts. Excel doesn't scale and lacks automation.",
+      "difficulty": "hard",
+      "tags": ["Cost Allocation", "Tag Policies", "Cost Categories", "Cost and Usage Reports", "Athena", "FinOps"]
+    },
+    {
+      "id": "q049",
+      "domain": "complex-organizations",
+      "text": "A company wants to implement a centralized egress solution for internet-bound traffic from 50+ VPCs across multiple regions. They need to inspect all traffic, apply URL filtering, and log all connections. What is the MOST scalable architecture?",
+      "choices": [
+        {
+          "id": "q049-a",
+          "text": "Deploy AWS Network Firewall in a centralized egress VPC per region, use Transit Gateway to route all internet traffic through the firewall, configure URL filtering rules, and send logs to CloudWatch Logs"
+        },
+        {
+          "id": "q049-b",
+          "text": "Deploy NAT Gateways in each VPC"
+        },
+        {
+          "id": "q049-c",
+          "text": "Use VPC endpoints for all services"
+        },
+        {
+          "id": "q049-d",
+          "text": "Deploy proxy servers on EC2 instances"
+        }
+      ],
+      "correctChoiceId": "q049-a",
+      "explanation": "AWS Network Firewall provides stateful inspection, URL filtering, and intrusion prevention. By deploying it in a centralized egress VPC and routing all internet-bound traffic through Transit Gateway, you can inspect all traffic from multiple VPCs. Network Firewall can log all connections to CloudWatch Logs or S3. This architecture scales to hundreds of VPCs and provides centralized management. NAT Gateways in each VPC don't provide inspection or filtering. VPC endpoints are for AWS services, not internet traffic. Proxy servers require management and don't scale as well.",
+      "difficulty": "hard",
+      "tags": ["Network Firewall", "Centralized Egress", "Transit Gateway", "URL Filtering", "Traffic Inspection"]
+    },
+    {
+      "id": "q050",
+      "domain": "complex-organizations",
+      "text": "A company needs to implement a solution that automatically remediates security findings across 100+ AWS accounts. They want to fix common issues like open security groups, unencrypted S3 buckets, and public RDS snapshots. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q050-a",
+          "text": "Use AWS Security Hub to aggregate findings, create EventBridge rules to trigger Systems Manager Automation runbooks for remediation, and use AWS Config conformance packs for preventive controls"
+        },
+        {
+          "id": "q050-b",
+          "text": "Manually review and fix security issues weekly"
+        },
+        {
+          "id": "q050-c",
+          "text": "Use Lambda functions to scan and fix issues"
+        },
+        {
+          "id": "q050-d",
+          "text": "Deploy third-party security tools"
+        }
+      ],
+      "correctChoiceId": "q050-a",
+      "explanation": "AWS Security Hub aggregates security findings from multiple services across accounts. EventBridge can trigger automated responses to specific findings. Systems Manager Automation provides pre-built and custom runbooks for remediation (like closing security groups or enabling encryption). AWS Config conformance packs provide preventive controls to stop non-compliant resources from being created. This provides both detection and automated remediation. Manual review doesn't scale. Custom Lambda functions require development and maintenance. Third-party tools may not integrate as well with AWS services.",
+      "difficulty": "hard",
+      "tags": ["Security Hub", "EventBridge", "Systems Manager Automation", "Config Conformance Packs", "Automated Remediation"]
+    }
+,
+    {
+      "id": "q051",
+      "domain": "new-solutions",
+      "text": "A company is building a real-time bidding platform that must process 1 million bid requests per second with sub-10ms latency. The system needs to maintain bid state and prevent duplicate bids. What is the MOST appropriate architecture?",
+      "choices": [
+        {
+          "id": "q051-a",
+          "text": "Use Amazon ElastiCache for Redis with cluster mode enabled for distributed caching, DynamoDB with DynamoDB Streams for bid storage, and Lambda for bid processing with reserved concurrency"
+        },
+        {
+          "id": "q051-b",
+          "text": "Use RDS with read replicas for bid storage"
+        },
+        {
+          "id": "q051-c",
+          "text": "Use S3 for bid storage with Lambda processing"
+        },
+        {
+          "id": "q051-d",
+          "text": "Use EC2 instances with local storage"
+        }
+      ],
+      "correctChoiceId": "q051-a",
+      "explanation": "ElastiCache for Redis with cluster mode provides sub-millisecond latency and can handle millions of requests per second. It's ideal for maintaining bid state and preventing duplicates. DynamoDB provides scalable, low-latency storage for bid records. DynamoDB Streams enable real-time processing. Lambda with reserved concurrency ensures consistent performance. This architecture meets the extreme performance requirements. RDS can't handle 1M req/sec. S3 has higher latency. EC2 with local storage doesn't provide the required scalability and durability.",
+      "difficulty": "hard",
+      "tags": ["ElastiCache", "Redis", "DynamoDB", "DynamoDB Streams", "Lambda", "High Performance", "Real-time"]
+    },
+    {
+      "id": "q052",
+      "domain": "new-solutions",
+      "text": "A financial application requires end-to-end encryption for all data, including data in use. They need to process sensitive data in memory without exposing it. What AWS service should they use?",
+      "choices": [
+        {
+          "id": "q052-a",
+          "text": "AWS Nitro Enclaves to create isolated compute environments with cryptographic attestation for processing sensitive data"
+        },
+        {
+          "id": "q052-b",
+          "text": "Use KMS encryption for data at rest only"
+        },
+        {
+          "id": "q052-c",
+          "text": "Use TLS for data in transit only"
+        },
+        {
+          "id": "q052-d",
+          "text": "Use CloudHSM for key storage only"
+        }
+      ],
+      "correctChoiceId": "q052-a",
+      "explanation": "AWS Nitro Enclaves provide isolated compute environments within EC2 instances that have no persistent storage, interactive access, or external networking. They use cryptographic attestation to verify the enclave's identity and integrity. This enables processing sensitive data in memory with strong isolation, meeting the requirement for data protection in use. KMS and TLS protect data at rest and in transit but not in use. CloudHSM stores keys but doesn't provide isolated compute for data processing.",
+      "difficulty": "hard",
+      "tags": ["Nitro Enclaves", "Encryption in Use", "Confidential Computing", "Security", "Cryptographic Attestation"]
+    },
+    {
+      "id": "q053",
+      "domain": "new-solutions",
+      "text": "A company is building a video streaming platform that needs to transcode uploaded videos into multiple formats and resolutions. The transcoding process takes 5-30 minutes per video. They receive 10,000 video uploads per day with unpredictable timing. What is the MOST cost-effective architecture?",
+      "choices": [
+        {
+          "id": "q053-a",
+          "text": "Use S3 for video storage, S3 Event Notifications to trigger SQS queue, AWS Batch with Spot Instances for transcoding, and store output in S3 with CloudFront for delivery"
+        },
+        {
+          "id": "q053-b",
+          "text": "Use EC2 On-Demand instances running 24/7 for transcoding"
+        },
+        {
+          "id": "q053-c",
+          "text": "Use Lambda functions for video transcoding"
+        },
+        {
+          "id": "q053-d",
+          "text": "Use Elastic Beanstalk with Auto Scaling"
+        }
+      ],
+      "correctChoiceId": "q053-a",
+      "explanation": "S3 Event Notifications trigger processing when videos are uploaded. SQS queues decouple upload from processing and handle bursts. AWS Batch automatically provisions compute resources and can use Spot Instances for up to 90% cost savings. Batch is designed for long-running jobs like video transcoding. CloudFront provides low-latency video delivery. This architecture is cost-effective and scales automatically. EC2 running 24/7 wastes resources during low-demand periods. Lambda has a 15-minute timeout, too short for transcoding. Elastic Beanstalk is designed for web applications, not batch processing.",
+      "difficulty": "hard",
+      "tags": ["AWS Batch", "Spot Instances", "S3 Event Notifications", "SQS", "Video Transcoding", "Cost Optimization"]
+    },
+    {
+      "id": "q054",
+      "domain": "new-solutions",
+      "text": "A company needs to build a GraphQL API that aggregates data from multiple microservices (REST APIs, databases, and Lambda functions). The API must support real-time subscriptions and offline sync for mobile clients. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q054-a",
+          "text": "Use AWS AppSync with multiple data sources (HTTP resolvers for REST APIs, DynamoDB resolvers, and Lambda resolvers), enable real-time subscriptions, and configure conflict resolution for offline sync"
+        },
+        {
+          "id": "q054-b",
+          "text": "Build a custom GraphQL server on EC2 with Apollo Server"
+        },
+        {
+          "id": "q054-c",
+          "text": "Use API Gateway with Lambda for GraphQL"
+        },
+        {
+          "id": "q054-d",
+          "text": "Use REST APIs with polling for updates"
+        }
+      ],
+      "correctChoiceId": "q054-a",
+      "explanation": "AWS AppSync is a fully managed GraphQL service that supports multiple data sources including HTTP endpoints, DynamoDB, Lambda, and RDS. It provides built-in real-time subscriptions using WebSockets and offline sync with conflict resolution for mobile clients. AppSync handles the complexity of aggregating data from multiple sources. Building a custom server requires managing infrastructure and implementing real-time and offline features. API Gateway doesn't provide GraphQL-specific features like subscriptions and offline sync. REST with polling is inefficient and doesn't provide true real-time updates.",
+      "difficulty": "hard",
+      "tags": ["AppSync", "GraphQL", "Real-time Subscriptions", "Offline Sync", "Multi-Source Aggregation"]
+    },
+    {
+      "id": "q055",
+      "domain": "new-solutions",
+      "text": "A company is building a machine learning inference API that must respond within 100ms. The ML model is 2GB and takes 30 seconds to load. They expect 1000 requests per second during peak hours. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q055-a",
+          "text": "Use Amazon SageMaker with multi-model endpoints and auto-scaling, or Lambda with Provisioned Concurrency and EFS for model storage"
+        },
+        {
+          "id": "q055-b",
+          "text": "Use Lambda without Provisioned Concurrency"
+        },
+        {
+          "id": "q055-c",
+          "text": "Use EC2 instances with the model loaded in memory"
+        },
+        {
+          "id": "q055-d",
+          "text": "Use S3 to store the model and load it on each request"
+        }
+      ],
+      "correctChoiceId": "q055-a",
+      "explanation": "SageMaker multi-model endpoints can host multiple models on the same endpoint and cache frequently used models in memory, providing low-latency inference with auto-scaling. Alternatively, Lambda with Provisioned Concurrency keeps functions initialized with the model loaded, eliminating cold starts. EFS provides shared storage for the large model file. Both options can meet the 100ms latency requirement. Lambda without Provisioned Concurrency would have cold starts with 30-second model loading. EC2 instances work but require more management. Loading from S3 on each request adds too much latency.",
+      "difficulty": "hard",
+      "tags": ["SageMaker", "Multi-Model Endpoints", "Lambda", "Provisioned Concurrency", "EFS", "ML Inference"]
+    },
+    {
+      "id": "q056",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a multi-region active-active architecture for their web application. They require automatic failover, data consistency across regions, and the ability to serve users from the nearest region. What is the MOST appropriate architecture?",
+      "choices": [
+        {
+          "id": "q056-a",
+          "text": "Use Route 53 with latency-based routing and health checks, Aurora Global Database for data replication, ElastiCache Global Datastore for caching, and CloudFront with multiple origins"
+        },
+        {
+          "id": "q056-b",
+          "text": "Use a single region with CloudFront for global distribution"
+        },
+        {
+          "id": "q056-c",
+          "text": "Use Route 53 geolocation routing with separate databases per region"
+        },
+        {
+          "id": "q056-d",
+          "text": "Use VPN connections between regions"
+        }
+      ],
+      "correctChoiceId": "q056-a",
+      "explanation": "Route 53 latency-based routing directs users to the nearest region with health checks for automatic failover. Aurora Global Database provides cross-region replication with typically less than 1 second lag and supports writes in multiple regions. ElastiCache Global Datastore provides cross-region cache replication. CloudFront with multiple origins provides edge caching and automatic failover. This architecture provides true active-active capability with data consistency. Single region doesn't provide active-active. Separate databases per region create data consistency challenges. VPN connections don't solve application-level failover.",
+      "difficulty": "hard",
+      "tags": ["Multi-Region", "Active-Active", "Route 53", "Aurora Global Database", "ElastiCache Global Datastore", "CloudFront"]
+    },
+    {
+      "id": "q057",
+      "domain": "new-solutions",
+      "text": "A company is building an IoT platform that ingests data from 1 million devices sending data every 10 seconds. They need to process data in real-time, store it for analysis, and trigger alerts on anomalies. What is the MOST scalable architecture?",
+      "choices": [
+        {
+          "id": "q057-a",
+          "text": "Use AWS IoT Core for device connectivity, Kinesis Data Streams for ingestion, Lambda for real-time processing and anomaly detection, Kinesis Data Firehose to S3 for storage, and SNS for alerts"
+        },
+        {
+          "id": "q057-b",
+          "text": "Use API Gateway with Lambda and RDS for storage"
+        },
+        {
+          "id": "q057-c",
+          "text": "Use EC2 instances with MQTT broker and MySQL database"
+        },
+        {
+          "id": "q057-d",
+          "text": "Use SQS with EC2 processing and DynamoDB storage"
+        }
+      ],
+      "correctChoiceId": "q057-a",
+      "explanation": "AWS IoT Core is designed for IoT device connectivity and can handle millions of devices. Kinesis Data Streams can ingest millions of events per second. Lambda processes streams in real-time for anomaly detection. Kinesis Data Firehose automatically delivers data to S3 for long-term storage and analysis. SNS provides scalable alerting. This architecture is fully managed and scales automatically. API Gateway has rate limits that may not handle 1M devices. EC2 with MQTT requires management and may not scale as well. SQS has lower throughput than Kinesis for this use case.",
+      "difficulty": "hard",
+      "tags": ["IoT Core", "Kinesis Data Streams", "Lambda", "Kinesis Firehose", "SNS", "IoT", "Real-time Processing"]
+    },
+    {
+      "id": "q058",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a secure API that requires mutual TLS (mTLS) authentication, where both client and server certificates are validated. The API is built with API Gateway and Lambda. What is the BEST implementation?",
+      "choices": [
+        {
+          "id": "q058-a",
+          "text": "Use API Gateway with custom domain and mutual TLS authentication enabled, store client certificates in ACM, and validate certificates in Lambda authorizer"
+        },
+        {
+          "id": "q058-b",
+          "text": "Use API Gateway with API keys only"
+        },
+        {
+          "id": "q058-c",
+          "text": "Use Application Load Balancer with Lambda targets"
+        },
+        {
+          "id": "q058-d",
+          "text": "Implement certificate validation in Lambda function code"
+        }
+      ],
+      "correctChoiceId": "q058-a",
+      "explanation": "API Gateway supports mutual TLS authentication for custom domains. You can configure a truststore in S3 containing trusted client CA certificates. API Gateway validates client certificates during the TLS handshake. A Lambda authorizer can perform additional validation of certificate attributes. ACM manages server certificates. This provides strong authentication with minimal custom code. API keys alone don't provide certificate-based authentication. ALB supports mTLS but API Gateway is more suitable for APIs. Implementing validation only in Lambda doesn't leverage API Gateway's built-in mTLS support.",
+      "difficulty": "hard",
+      "tags": ["API Gateway", "Mutual TLS", "mTLS", "ACM", "Lambda Authorizer", "Security", "Certificate Authentication"]
+    },
+    {
+      "id": "q059",
+      "domain": "new-solutions",
+      "text": "A company is building a document processing system that extracts text from images and PDFs, analyzes sentiment, and stores results. They process 100,000 documents per day with varying sizes (1KB to 100MB). What is the MOST cost-effective serverless architecture?",
+      "choices": [
+        {
+          "id": "q059-a",
+          "text": "Use S3 for document storage, S3 Event Notifications to trigger Step Functions workflow, Lambda for orchestration, Amazon Textract for text extraction, Amazon Comprehend for sentiment analysis, and DynamoDB for results storage"
+        },
+        {
+          "id": "q059-b",
+          "text": "Use EC2 instances with custom OCR software"
+        },
+        {
+          "id": "q059-c",
+          "text": "Use Lambda only for all processing"
+        },
+        {
+          "id": "q059-d",
+          "text": "Use SageMaker for all processing"
+        }
+      ],
+      "correctChoiceId": "q059-a",
+      "explanation": "S3 Event Notifications trigger processing when documents are uploaded. Step Functions orchestrates the workflow (extract, analyze, store) with error handling and retries. Amazon Textract extracts text from images and PDFs using ML. Amazon Comprehend analyzes sentiment. Lambda coordinates the workflow. DynamoDB stores results. This serverless architecture scales automatically and you only pay for what you use. EC2 requires management and runs continuously. Lambda alone can't handle large files efficiently. SageMaker is for ML model training/hosting, not document processing.",
+      "difficulty": "hard",
+      "tags": ["Step Functions", "Lambda", "Textract", "Comprehend", "DynamoDB", "Serverless", "Document Processing"]
+    },
+    {
+      "id": "q060",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a blue/green deployment strategy for their containerized application running on ECS Fargate. They want to gradually shift traffic to the new version and automatically roll back if errors increase. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q060-a",
+          "text": "Use AWS CodeDeploy with ECS blue/green deployment, configure Application Load Balancer with target groups for blue and green, set up CloudWatch alarms for automatic rollback, and use linear or canary traffic shifting"
+        },
+        {
+          "id": "q060-b",
+          "text": "Manually update ECS task definitions and services"
+        },
+        {
+          "id": "q060-c",
+          "text": "Use CloudFormation to replace the entire stack"
+        },
+        {
+          "id": "q060-d",
+          "text": "Use Route 53 weighted routing to shift traffic"
+        }
+      ],
+      "correctChoiceId": "q060-a",
+      "explanation": "AWS CodeDeploy supports blue/green deployments for ECS with automatic traffic shifting. It creates a new task set (green) while keeping the old one (blue). ALB routes traffic between blue and green target groups. You can configure linear (e.g., 10% every 10 minutes) or canary (e.g., 10% then 90%) traffic shifting. CloudWatch alarms can trigger automatic rollback if error rates increase. This provides safe, automated deployments. Manual updates don't provide gradual traffic shifting. CloudFormation replacement causes downtime. Route 53 weighted routing doesn't integrate with ECS deployment lifecycle.",
+      "difficulty": "hard",
+      "tags": ["CodeDeploy", "ECS", "Fargate", "Blue/Green Deployment", "ALB", "Canary Deployment", "Automatic Rollback"]
+    }
+,
+    {
+      "id": "q061",
+      "domain": "continuous-improvement",
+      "text": "A company's application is experiencing memory leaks causing periodic crashes. They need to identify the root cause by analyzing memory usage patterns and heap dumps. What AWS services should they use?",
+      "choices": [
+        {
+          "id": "q061-a",
+          "text": "Use CloudWatch Container Insights for memory metrics, enable CloudWatch Application Insights for automatic problem detection, and use AWS X-Ray for memory profiling with custom segments"
+        },
+        {
+          "id": "q061-b",
+          "text": "Use CloudWatch Logs only"
+        },
+        {
+          "id": "q061-c",
+          "text": "Use AWS Config for resource monitoring"
+        },
+        {
+          "id": "q061-d",
+          "text": "Manually monitor application logs"
+        }
+      ],
+      "correctChoiceId": "q061-a",
+      "explanation": "CloudWatch Container Insights provides detailed memory metrics for containers. CloudWatch Application Insights uses ML to automatically detect application problems including memory leaks. X-Ray can be instrumented with custom segments to track memory allocation patterns. Together, these provide comprehensive memory analysis. CloudWatch Logs alone don't provide memory profiling. Config is for compliance, not performance analysis. Manual monitoring doesn't scale and lacks automated detection.",
+      "difficulty": "hard",
+      "tags": ["CloudWatch Container Insights", "Application Insights", "X-Ray", "Memory Leak Detection", "Performance Analysis"]
+    },
+    {
+      "id": "q062",
+      "domain": "continuous-improvement",
+      "text": "A company wants to optimize their DynamoDB costs. They have tables with varying access patterns - some frequently accessed, others rarely accessed. What is the MOST cost-effective approach?",
+      "choices": [
+        {
+          "id": "q062-a",
+          "text": "Enable DynamoDB auto scaling for frequently accessed tables, use on-demand billing for unpredictable workloads, implement DynamoDB Standard-IA for infrequently accessed data, and use DynamoDB Contributor Insights to identify hot partitions"
+        },
+        {
+          "id": "q062-b",
+          "text": "Use provisioned capacity for all tables"
+        },
+        {
+          "id": "q062-c",
+          "text": "Move all data to S3"
+        },
+        {
+          "id": "q062-d",
+          "text": "Delete old data to reduce costs"
+        }
+      ],
+      "correctChoiceId": "q062-a",
+      "explanation": "DynamoDB auto scaling adjusts capacity based on actual usage for predictable workloads. On-demand billing is cost-effective for unpredictable or spiky workloads. DynamoDB Standard-IA (Infrequent Access) provides up to 60% cost savings for infrequently accessed data. Contributor Insights identifies hot partitions that may need optimization. This combination optimizes costs based on access patterns. Fixed provisioned capacity may over-provision or under-provision. S3 is not a database replacement. Deleting data may violate retention requirements.",
+      "difficulty": "hard",
+      "tags": ["DynamoDB", "Auto Scaling", "On-Demand Billing", "Standard-IA", "Contributor Insights", "Cost Optimization"]
+    },
+    {
+      "id": "q063",
+      "domain": "continuous-improvement",
+      "text": "A company's Lambda functions are experiencing throttling during peak hours. They need to optimize Lambda performance and prevent throttling while controlling costs. What strategies should they implement?",
+      "choices": [
+        {
+          "id": "q063-a",
+          "text": "Request concurrency limit increase, implement SQS for buffering requests, use Lambda reserved concurrency for critical functions, and enable Lambda Insights for performance monitoring"
+        },
+        {
+          "id": "q063-b",
+          "text": "Increase memory allocation for all functions"
+        },
+        {
+          "id": "q063-c",
+          "text": "Replace Lambda with EC2 instances"
+        },
+        {
+          "id": "q063-d",
+          "text": "Reduce function timeout"
+        }
+      ],
+      "correctChoiceId": "q063-a",
+      "explanation": "Lambda has account-level concurrency limits that can be increased. SQS buffers requests during spikes, preventing throttling. Reserved concurrency guarantees capacity for critical functions. Lambda Insights provides detailed performance metrics to identify optimization opportunities. This combination addresses throttling while maintaining cost efficiency. Increasing memory helps performance but doesn't prevent throttling. EC2 loses serverless benefits. Reducing timeout doesn't address concurrency limits.",
+      "difficulty": "hard",
+      "tags": ["Lambda", "Throttling", "Concurrency", "SQS", "Lambda Insights", "Performance Optimization"]
+    },
+    {
+      "id": "q064",
+      "domain": "continuous-improvement",
+      "text": "A company wants to implement comprehensive cost anomaly detection across all AWS services and accounts. They need to be alerted when costs deviate from expected patterns. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q064-a",
+          "text": "Enable AWS Cost Anomaly Detection with ML-based anomaly detection, configure SNS notifications for alerts, use Cost Categories for grouping, and create AWS Budgets for threshold-based alerts"
+        },
+        {
+          "id": "q064-b",
+          "text": "Manually review Cost Explorer daily"
+        },
+        {
+          "id": "q064-c",
+          "text": "Use CloudWatch billing alarms only"
+        },
+        {
+          "id": "q064-d",
+          "text": "Export billing data to Excel for analysis"
+        }
+      ],
+      "correctChoiceId": "q064-a",
+      "explanation": "AWS Cost Anomaly Detection uses ML to automatically detect unusual spending patterns. It learns normal spending patterns and alerts on deviations. SNS provides real-time notifications. Cost Categories allow grouping costs by business dimensions. AWS Budgets provide threshold-based alerts for predictable limits. This combination provides both ML-based anomaly detection and threshold-based alerting. Manual review doesn't scale. CloudWatch billing alarms only provide threshold-based alerts, not anomaly detection. Excel doesn't provide automated detection.",
+      "difficulty": "medium",
+      "tags": ["Cost Anomaly Detection", "AWS Budgets", "Cost Categories", "SNS", "Cost Management", "ML"]
+    },
+    {
+      "id": "q065",
+      "domain": "continuous-improvement",
+      "text": "A company's RDS Aurora cluster is experiencing performance degradation during batch processing jobs. They need to optimize performance without impacting production workloads. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q065-a",
+          "text": "Create Aurora read replicas with different instance sizes for batch processing, use custom endpoints to route batch queries to specific replicas, enable Performance Insights to identify slow queries, and use Aurora Serverless v2 for variable workloads"
+        },
+        {
+          "id": "q065-b",
+          "text": "Increase the primary instance size"
+        },
+        {
+          "id": "q065-c",
+          "text": "Run batch jobs during off-peak hours only"
+        },
+        {
+          "id": "q065-d",
+          "text": "Move batch processing to a separate RDS instance"
+        }
+      ],
+      "correctChoiceId": "q065-a",
+      "explanation": "Aurora read replicas can have different instance sizes optimized for specific workloads. Custom endpoints allow routing specific queries (like batch processing) to specific replicas, isolating them from production traffic. Performance Insights identifies slow queries for optimization. Aurora Serverless v2 automatically scales capacity based on workload, ideal for variable batch processing. This provides workload isolation and optimization. Increasing primary instance size doesn't isolate workloads. Off-peak scheduling may not be feasible. Separate RDS instance loses Aurora benefits and increases costs.",
+      "difficulty": "hard",
+      "tags": ["Aurora", "Read Replicas", "Custom Endpoints", "Performance Insights", "Aurora Serverless v2", "Workload Isolation"]
+    },
+    {
+      "id": "q066",
+      "domain": "continuous-improvement",
+      "text": "A company wants to implement automated security patching for their EC2 instances across multiple accounts while minimizing downtime. They need to ensure patches are tested before production deployment. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q066-a",
+          "text": "Use AWS Systems Manager Patch Manager with patch baselines, create maintenance windows for patching, use patch groups to separate dev/staging/prod, and implement AWS Systems Manager Automation for testing and approval workflows"
+        },
+        {
+          "id": "q066-b",
+          "text": "Manually SSH into each instance to apply patches"
+        },
+        {
+          "id": "q066-c",
+          "text": "Use AWS Config to detect unpatched instances"
+        },
+        {
+          "id": "q066-d",
+          "text": "Replace instances with new AMIs monthly"
+        }
+      ],
+      "correctChoiceId": "q066-a",
+      "explanation": "Systems Manager Patch Manager automates patching across multiple accounts. Patch baselines define which patches to apply. Maintenance windows schedule patching during approved times. Patch groups allow phased rollout (dev → staging → prod). Systems Manager Automation can implement testing and approval workflows between phases. This provides automated, controlled patching. Manual patching doesn't scale. Config detects but doesn't remediate. Monthly AMI replacement causes unnecessary downtime and doesn't address urgent security patches.",
+      "difficulty": "hard",
+      "tags": ["Systems Manager", "Patch Manager", "Maintenance Windows", "Patch Groups", "Automation", "Security Patching"]
+    },
+    {
+      "id": "q067",
+      "domain": "continuous-improvement",
+      "text": "A company's application generates millions of log entries per day. They need to reduce CloudWatch Logs costs while maintaining the ability to search recent logs and archive old logs for compliance. What is the MOST cost-effective approach?",
+      "choices": [
+        {
+          "id": "q067-a",
+          "text": "Use CloudWatch Logs with log retention policies, export old logs to S3 with S3 Intelligent-Tiering, use CloudWatch Logs Insights for recent log analysis, and use Athena for querying archived logs in S3"
+        },
+        {
+          "id": "q067-b",
+          "text": "Keep all logs in CloudWatch Logs indefinitely"
+        },
+        {
+          "id": "q067-c",
+          "text": "Delete old logs to save costs"
+        },
+        {
+          "id": "q067-d",
+          "text": "Store all logs in DynamoDB"
+        }
+      ],
+      "correctChoiceId": "q067-a",
+      "explanation": "CloudWatch Logs retention policies automatically delete logs after a specified period. Exporting to S3 before deletion preserves logs for compliance. S3 Intelligent-Tiering automatically moves data to cheaper storage tiers. CloudWatch Logs Insights provides powerful querying for recent logs. Athena can query archived logs in S3 at much lower cost than CloudWatch Logs. This balances accessibility and cost. Keeping all logs in CloudWatch Logs is expensive. Deleting logs may violate compliance. DynamoDB is not designed for log storage.",
+      "difficulty": "medium",
+      "tags": ["CloudWatch Logs", "Log Retention", "S3", "Intelligent-Tiering", "Athena", "Cost Optimization", "Compliance"]
+    },
+    {
+      "id": "q068",
+      "domain": "continuous-improvement",
+      "text": "A company wants to implement proactive monitoring that predicts potential issues before they impact users. They need to detect anomalies in application metrics and automatically create incidents. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q068-a",
+          "text": "Use CloudWatch Anomaly Detection with ML-based anomaly detection on key metrics, create CloudWatch Composite Alarms for complex conditions, integrate with AWS Systems Manager Incident Manager for incident management, and use EventBridge for automated responses"
+        },
+        {
+          "id": "q068-b",
+          "text": "Use static CloudWatch alarms with fixed thresholds"
+        },
+        {
+          "id": "q068-c",
+          "text": "Manually monitor dashboards"
+        },
+        {
+          "id": "q068-d",
+          "text": "Use third-party monitoring tools only"
+        }
+      ],
+      "correctChoiceId": "q068-a",
+      "explanation": "CloudWatch Anomaly Detection uses ML to learn normal metric patterns and detect anomalies without fixed thresholds. Composite Alarms combine multiple alarms for complex conditions (e.g., high CPU AND high error rate). Systems Manager Incident Manager provides incident management with runbooks and escalation. EventBridge enables automated responses to incidents. This provides proactive, intelligent monitoring. Static thresholds don't adapt to changing patterns. Manual monitoring doesn't scale. Third-party tools may not integrate as well with AWS services.",
+      "difficulty": "hard",
+      "tags": ["CloudWatch Anomaly Detection", "Composite Alarms", "Incident Manager", "EventBridge", "Proactive Monitoring", "ML"]
+    },
+    {
+      "id": "q069",
+      "domain": "continuous-improvement",
+      "text": "A company's ECS containers are experiencing intermittent network connectivity issues. They need to troubleshoot network traffic between containers and external services. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q069-a",
+          "text": "Enable VPC Flow Logs for the VPC, use CloudWatch Logs Insights to analyze flow logs, enable ECS Container Insights for container-level metrics, and use AWS X-Ray for distributed tracing of network calls"
+        },
+        {
+          "id": "q069-b",
+          "text": "Use tcpdump on EC2 instances"
+        },
+        {
+          "id": "q069-c",
+          "text": "Check security group rules manually"
+        },
+        {
+          "id": "q069-d",
+          "text": "Restart containers when issues occur"
+        }
+      ],
+      "correctChoiceId": "q069-a",
+      "explanation": "VPC Flow Logs capture network traffic metadata for troubleshooting. CloudWatch Logs Insights can query flow logs to identify connection issues. ECS Container Insights provides container-level network metrics. X-Ray traces requests across services, showing network latency and failures. This combination provides comprehensive network troubleshooting. tcpdump requires SSH access and doesn't scale. Manual security group checks don't identify intermittent issues. Restarting containers doesn't address root causes.",
+      "difficulty": "hard",
+      "tags": ["VPC Flow Logs", "CloudWatch Logs Insights", "ECS Container Insights", "X-Ray", "Network Troubleshooting"]
+    },
+    {
+      "id": "q070",
+      "domain": "continuous-improvement",
+      "text": "A company wants to optimize their S3 data transfer costs. They frequently transfer large amounts of data between S3 buckets in different regions and to on-premises systems. What strategies should they implement?",
+      "choices": [
+        {
+          "id": "q070-a",
+          "text": "Use S3 Transfer Acceleration for uploads from on-premises, enable S3 Replication with Replication Time Control for cross-region transfers, use VPC endpoints for S3 to avoid data transfer charges, and implement S3 Intelligent-Tiering to reduce storage costs"
+        },
+        {
+          "id": "q070-b",
+          "text": "Use standard internet transfer for all data"
+        },
+        {
+          "id": "q070-c",
+          "text": "Compress all data before transfer"
+        },
+        {
+          "id": "q070-d",
+          "text": "Use AWS DataSync for all transfers"
+        }
+      ],
+      "correctChoiceId": "q070-a",
+      "explanation": "S3 Transfer Acceleration uses CloudFront edge locations to speed up uploads and can reduce costs for long-distance transfers. S3 Replication with RTC provides predictable replication times. VPC endpoints for S3 eliminate data transfer charges for traffic within the same region. Intelligent-Tiering reduces storage costs by automatically moving data to cheaper tiers. This combination optimizes both transfer and storage costs. Standard internet transfer is slower and may be more expensive. Compression helps but doesn't address transfer optimization. DataSync is good for initial migrations but not ongoing transfers.",
+      "difficulty": "hard",
+      "tags": ["S3 Transfer Acceleration", "S3 Replication", "VPC Endpoints", "Intelligent-Tiering", "Cost Optimization", "Data Transfer"]
+    }
+,
+    {
+      "id": "q071",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a complex SAP system to AWS. They need high performance, low latency storage, and want to minimize changes to the SAP application. What is the BEST infrastructure solution?",
+      "choices": [
+        {
+          "id": "q071-a",
+          "text": "Use EC2 High Memory instances with Amazon FSx for NetApp ONTAP for shared storage, and deploy in a placement group for low latency"
+        },
+        {
+          "id": "q071-b",
+          "text": "Use general purpose EC2 instances with EBS volumes"
+        },
+        {
+          "id": "q071-c",
+          "text": "Use Lambda for SAP processing"
+        },
+        {
+          "id": "q071-d",
+          "text": "Use Elastic Beanstalk for SAP deployment"
+        }
+      ],
+      "correctChoiceId": "q071-a",
+      "explanation": "SAP systems require high memory and high-performance storage. EC2 High Memory instances (like x1e, u-*) are optimized for SAP workloads. FSx for NetApp ONTAP provides enterprise-grade shared storage with NFS/SMB support that SAP requires, with features like snapshots and cloning. Placement groups provide low-latency network connectivity between instances. This combination meets SAP's demanding requirements. General purpose instances may not have enough memory. Lambda is not suitable for SAP. Elastic Beanstalk is for web applications, not SAP.",
+      "difficulty": "hard",
+      "tags": ["SAP Migration", "High Memory Instances", "FSx for NetApp ONTAP", "Placement Groups", "Enterprise Applications"]
+    },
+    {
+      "id": "q072",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a legacy application that uses Oracle RAC (Real Application Clusters) for high availability. They want to maintain similar HA capabilities on AWS. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q072-a",
+          "text": "Migrate to Amazon RDS for Oracle with Multi-AZ deployment for high availability, or use Amazon Aurora PostgreSQL-Compatible Edition if application can be refactored"
+        },
+        {
+          "id": "q072-b",
+          "text": "Deploy Oracle RAC on EC2 instances"
+        },
+        {
+          "id": "q072-c",
+          "text": "Use DynamoDB as a replacement"
+        },
+        {
+          "id": "q072-d",
+          "text": "Keep Oracle RAC on-premises and connect via VPN"
+        }
+      ],
+      "correctChoiceId": "q072-a",
+      "explanation": "RDS for Oracle with Multi-AZ provides automatic failover and high availability similar to Oracle RAC, but fully managed. It handles patching, backups, and failover automatically. If the application can be refactored, Aurora PostgreSQL provides even better performance and cost efficiency with similar HA capabilities. Deploying Oracle RAC on EC2 is complex, expensive (licensing), and requires significant management. DynamoDB is a different data model requiring application rewrite. Keeping on-premises doesn't achieve cloud migration goals.",
+      "difficulty": "hard",
+      "tags": ["Oracle Migration", "RDS for Oracle", "Multi-AZ", "Aurora PostgreSQL", "High Availability", "Database Migration"]
+    },
+    {
+      "id": "q073",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a monolithic .NET application to AWS. They want to containerize it and implement a phased modernization approach. What is the BEST strategy?",
+      "choices": [
+        {
+          "id": "q073-a",
+          "text": "Use AWS App2Container to automatically containerize the .NET application, deploy to Amazon ECS or EKS, then gradually refactor into microservices using AWS App Runner for new services"
+        },
+        {
+          "id": "q073-b",
+          "text": "Manually rewrite the entire application in a new language"
+        },
+        {
+          "id": "q073-c",
+          "text": "Deploy to EC2 without containerization"
+        },
+        {
+          "id": "q073-d",
+          "text": "Use Elastic Beanstalk with the default .NET platform"
+        }
+      ],
+      "correctChoiceId": "q073-a",
+      "explanation": "AWS App2Container automatically analyzes and containerizes .NET and Java applications with minimal code changes. It generates container images and deployment configurations for ECS or EKS. Once containerized, you can gradually extract microservices. App Runner provides a simple way to deploy new microservices without managing infrastructure. This enables phased modernization. Complete rewrite is risky and expensive. EC2 without containers doesn't modernize. Elastic Beanstalk doesn't provide the same containerization and microservices path.",
+      "difficulty": "hard",
+      "tags": ["App2Container", ".NET Migration", "Containerization", "ECS", "EKS", "App Runner", "Modernization"]
+    },
+    {
+      "id": "q074",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a data warehouse from Teradata to AWS. They have 500TB of data and complex ETL processes. What is the BEST migration approach?",
+      "choices": [
+        {
+          "id": "q074-a",
+          "text": "Use AWS Schema Conversion Tool to convert Teradata schemas and ETL scripts to Amazon Redshift, use AWS Snowball for initial data transfer, then AWS DMS for ongoing replication during cutover"
+        },
+        {
+          "id": "q074-b",
+          "text": "Export data to CSV files and upload via internet"
+        },
+        {
+          "id": "q074-c",
+          "text": "Manually rewrite all ETL processes"
+        },
+        {
+          "id": "q074-d",
+          "text": "Use RDS for the data warehouse"
+        }
+      ],
+      "correctChoiceId": "q074-a",
+      "explanation": "AWS SCT can convert Teradata schemas, stored procedures, and ETL scripts to Redshift-compatible formats. For 500TB, Snowball provides fast, secure physical data transfer. AWS DMS can replicate ongoing changes during the migration period, minimizing downtime. Redshift is designed for data warehousing workloads. This provides an efficient, automated migration path. Internet upload of 500TB would take too long. Manual rewriting is time-consuming and error-prone. RDS is for OLTP, not data warehousing.",
+      "difficulty": "hard",
+      "tags": ["Data Warehouse Migration", "Teradata", "Redshift", "SCT", "Snowball", "DMS", "Large Data Migration"]
+    },
+    {
+      "id": "q075",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a legacy application that uses LDAP for authentication. They want to modernize authentication while maintaining compatibility with existing LDAP clients. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q075-a",
+          "text": "Use AWS Directory Service for Microsoft Active Directory (AWS Managed Microsoft AD) which supports LDAP, or use Amazon Cognito with LDAP integration for new applications"
+        },
+        {
+          "id": "q075-b",
+          "text": "Deploy OpenLDAP on EC2 instances"
+        },
+        {
+          "id": "q075-c",
+          "text": "Use IAM for all authentication"
+        },
+        {
+          "id": "q075-d",
+          "text": "Keep LDAP on-premises only"
+        }
+      ],
+      "correctChoiceId": "q075-a",
+      "explanation": "AWS Managed Microsoft AD is a fully managed Active Directory service that supports LDAP protocol, providing compatibility with existing LDAP clients. It's highly available and integrates with other AWS services. For new applications, Cognito can integrate with LDAP directories while providing modern authentication features. This provides both compatibility and modernization. OpenLDAP on EC2 requires management. IAM is for AWS resource access, not application authentication. Keeping LDAP on-premises doesn't support cloud migration.",
+      "difficulty": "medium",
+      "tags": ["Directory Service", "AWS Managed Microsoft AD", "LDAP", "Cognito", "Authentication Migration"]
+    },
+    {
+      "id": "q076",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a high-performance computing (HPC) workload to AWS. The workload requires low-latency inter-node communication and shared file system access. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q076-a",
+          "text": "Use EC2 instances with Elastic Fabric Adapter (EFA) in a cluster placement group, Amazon FSx for Lustre for shared storage, and AWS ParallelCluster for cluster management"
+        },
+        {
+          "id": "q076-b",
+          "text": "Use general purpose EC2 instances with EBS volumes"
+        },
+        {
+          "id": "q076-c",
+          "text": "Use Lambda for HPC processing"
+        },
+        {
+          "id": "q076-d",
+          "text": "Use ECS with Fargate"
+        }
+      ],
+      "correctChoiceId": "q076-a",
+      "explanation": "Elastic Fabric Adapter (EFA) provides low-latency, high-throughput inter-node communication required for HPC workloads using MPI. Cluster placement groups ensure instances are physically close for lowest latency. FSx for Lustre provides high-performance shared file system designed for HPC. AWS ParallelCluster simplifies HPC cluster deployment and management. This combination is optimized for HPC workloads. General purpose instances don't provide EFA. Lambda has execution time limits. Fargate doesn't support EFA or HPC workloads.",
+      "difficulty": "hard",
+      "tags": ["HPC", "Elastic Fabric Adapter", "FSx for Lustre", "ParallelCluster", "Cluster Placement Group", "High Performance Computing"]
+    },
+    {
+      "id": "q077",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a legacy application that stores session state in-memory on application servers. They want to modernize to support horizontal scaling. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q077-a",
+          "text": "Refactor the application to store session state in Amazon ElastiCache for Redis or DynamoDB, enabling stateless application servers that can scale horizontally"
+        },
+        {
+          "id": "q077-b",
+          "text": "Use sticky sessions on the load balancer"
+        },
+        {
+          "id": "q077-c",
+          "text": "Store session state in local files"
+        },
+        {
+          "id": "q077-d",
+          "text": "Use a single large EC2 instance"
+        }
+      ],
+      "correctChoiceId": "q077-a",
+      "explanation": "Externalizing session state to ElastiCache or DynamoDB makes application servers stateless, enabling true horizontal scaling and high availability. ElastiCache provides sub-millisecond latency for session data. DynamoDB provides durability and automatic scaling. This is a key modernization pattern. Sticky sessions limit scaling and create single points of failure. Local files don't support horizontal scaling. A single large instance doesn't scale and has no redundancy.",
+      "difficulty": "medium",
+      "tags": ["Session State", "ElastiCache", "DynamoDB", "Stateless Architecture", "Horizontal Scaling", "Modernization"]
+    },
+    {
+      "id": "q078",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a legacy batch processing system that runs nightly jobs processing millions of records. The jobs take 6-8 hours and must complete before business hours. What is the MOST cost-effective modernization approach?",
+      "choices": [
+        {
+          "id": "q078-a",
+          "text": "Refactor to use AWS Batch with Spot Instances for compute, S3 for data storage, and AWS Step Functions for workflow orchestration with parallel processing"
+        },
+        {
+          "id": "q078-b",
+          "text": "Use EC2 On-Demand instances running 24/7"
+        },
+        {
+          "id": "q078-c",
+          "text": "Use Lambda functions for all processing"
+        },
+        {
+          "id": "q078-d",
+          "text": "Keep the legacy system on-premises"
+        }
+      ],
+      "correctChoiceId": "q078-a",
+      "explanation": "AWS Batch automatically provisions compute resources and can use Spot Instances for up to 90% cost savings. Step Functions orchestrates complex workflows with parallel processing, reducing total execution time. S3 provides scalable, cost-effective storage. This modernizes the architecture while optimizing costs. EC2 running 24/7 wastes resources. Lambda has a 15-minute timeout, unsuitable for long-running batch jobs. Keeping on-premises doesn't achieve modernization goals.",
+      "difficulty": "hard",
+      "tags": ["AWS Batch", "Spot Instances", "Step Functions", "Batch Processing", "Modernization", "Cost Optimization"]
+    },
+    {
+      "id": "q079",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a multi-tier application with web servers, application servers, and database servers. They want to minimize downtime during migration. What is the BEST migration strategy?",
+      "choices": [
+        {
+          "id": "q079-a",
+          "text": "Use AWS Application Migration Service (MGN) to replicate all servers to AWS, test in a non-production environment, then perform cutover with minimal downtime using MGN's cutover window feature"
+        },
+        {
+          "id": "q079-b",
+          "text": "Take a full outage and manually rebuild in AWS"
+        },
+        {
+          "id": "q079-c",
+          "text": "Migrate one tier at a time over several months"
+        },
+        {
+          "id": "q079-d",
+          "text": "Use AWS DataSync to copy application files"
+        }
+      ],
+      "correctChoiceId": "q079-a",
+      "explanation": "AWS Application Migration Service (MGN) provides continuous replication of source servers to AWS. You can test the migrated environment without impacting production. When ready, MGN's cutover feature minimizes downtime (typically minutes) by synchronizing final changes and switching to AWS. This is the recommended approach for lift-and-shift migrations. Full outage causes extended downtime. Migrating one tier at a time is complex and risky. DataSync is for file transfers, not server migration.",
+      "difficulty": "medium",
+      "tags": ["Application Migration Service", "MGN", "Minimal Downtime", "Cutover", "Multi-Tier Application", "Lift-and-Shift"]
+    },
+    {
+      "id": "q080",
+      "domain": "migration-modernization",
+      "text": "A company is migrating a legacy application that uses FTP for file transfers. They want to modernize while maintaining FTP compatibility for existing clients. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q080-a",
+          "text": "Use AWS Transfer Family (SFTP/FTPS/FTP) with S3 as the backend storage, integrate with existing authentication systems, and gradually migrate clients to SFTP for better security"
+        },
+        {
+          "id": "q080-b",
+          "text": "Deploy an FTP server on EC2"
+        },
+        {
+          "id": "q080-c",
+          "text": "Force all clients to use S3 APIs immediately"
+        },
+        {
+          "id": "q080-d",
+          "text": "Keep FTP server on-premises"
+        }
+      ],
+      "correctChoiceId": "q080-a",
+      "explanation": "AWS Transfer Family provides fully managed SFTP, FTPS, and FTP services with S3 as backend storage. It maintains protocol compatibility for existing clients while providing cloud benefits. It integrates with existing authentication systems (Active Directory, LDAP, custom). You can gradually migrate clients to more secure protocols (SFTP). This modernizes infrastructure while maintaining compatibility. EC2 FTP server requires management. Forcing immediate API changes disrupts clients. Keeping on-premises doesn't achieve migration goals.",
+      "difficulty": "medium",
+      "tags": ["Transfer Family", "SFTP", "FTP", "S3", "File Transfer", "Modernization", "Protocol Compatibility"]
+    },
+    {
+      "id": "q081",
+      "domain": "complex-organizations",
+      "text": "A global enterprise needs to implement a centralized DNS solution that provides split-horizon DNS (different responses for internal vs external queries) across 100+ VPCs in multiple regions. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q081-a",
+          "text": "Use Route 53 Resolver with inbound/outbound endpoints, create private hosted zones for internal resolution, and use Route 53 public hosted zones for external resolution with different record sets"
+        },
+        {
+          "id": "q081-b",
+          "text": "Deploy BIND DNS servers in each VPC"
+        },
+        {
+          "id": "q081-c",
+          "text": "Use only public Route 53 hosted zones"
+        },
+        {
+          "id": "q081-d",
+          "text": "Maintain separate DNS infrastructure for each region"
+        }
+      ],
+      "correctChoiceId": "q081-a",
+      "explanation": "Route 53 private hosted zones provide internal DNS resolution for VPCs, while public hosted zones serve external queries. Resolver endpoints enable hybrid DNS. You can have the same domain name in both private and public zones with different records, providing split-horizon DNS. This scales across multiple VPCs and regions. BIND servers require management and don't scale as well. Public zones only don't provide internal resolution. Separate infrastructure per region creates management overhead.",
+      "difficulty": "hard",
+      "tags": ["Route 53", "Split-Horizon DNS", "Private Hosted Zones", "Resolver", "Multi-Region", "DNS Architecture"]
+    },
+    {
+      "id": "q082",
+      "domain": "complex-organizations",
+      "text": "A company needs to implement a solution that automatically discovers and catalogs all AWS resources across 200+ accounts, tracks configuration changes, and provides a searchable inventory. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q082-a",
+          "text": "Use AWS Config with multi-account multi-region aggregation, enable AWS Config recording for all resource types, and use AWS Config advanced queries for searching"
+        },
+        {
+          "id": "q082-b",
+          "text": "Manually maintain a spreadsheet of resources"
+        },
+        {
+          "id": "q082-c",
+          "text": "Use CloudTrail to track resource creation"
+        },
+        {
+          "id": "q082-d",
+          "text": "Use AWS Systems Manager Inventory for all resources"
+        }
+      ],
+      "correctChoiceId": "q082-a",
+      "explanation": "AWS Config continuously records resource configurations and changes across all accounts and regions. Multi-account aggregation provides centralized visibility. Config advanced queries use SQL-like syntax to search across all resources. This provides comprehensive resource discovery and tracking. Spreadsheets don't scale and become outdated. CloudTrail logs API calls but doesn't provide resource inventory. Systems Manager Inventory is limited to EC2 and on-premises instances.",
+      "difficulty": "medium",
+      "tags": ["AWS Config", "Resource Discovery", "Configuration Management", "Multi-Account", "Inventory"]
+    },
+    {
+      "id": "q083",
+      "domain": "complex-organizations",
+      "text": "A financial institution needs to implement network traffic monitoring and analysis across all VPCs to detect suspicious patterns and comply with regulatory requirements. What is the MOST comprehensive solution?",
+      "choices": [
+        {
+          "id": "q083-a",
+          "text": "Enable VPC Flow Logs for all VPCs, send logs to S3, use Amazon Athena for analysis, integrate with Amazon Detective for security investigation, and use GuardDuty VPC Flow Logs findings for threat detection"
+        },
+        {
+          "id": "q083-b",
+          "text": "Use CloudWatch Logs only"
+        },
+        {
+          "id": "q083-c",
+          "text": "Deploy packet capture tools on EC2 instances"
+        },
+        {
+          "id": "q083-d",
+          "text": "Use Network ACLs for monitoring"
+        }
+      ],
+      "correctChoiceId": "q083-a",
+      "explanation": "VPC Flow Logs capture network traffic metadata for all VPCs. Storing in S3 enables long-term retention for compliance. Athena provides SQL-based analysis of flow logs. Amazon Detective uses flow logs for security investigation and visualization. GuardDuty analyzes flow logs for threat detection. This provides comprehensive monitoring, analysis, and threat detection. CloudWatch Logs alone doesn't provide analysis tools. Packet capture tools don't scale. Network ACLs don't provide monitoring.",
+      "difficulty": "hard",
+      "tags": ["VPC Flow Logs", "Athena", "Amazon Detective", "GuardDuty", "Network Monitoring", "Compliance"]
+    },
+    {
+      "id": "q084",
+      "domain": "complex-organizations",
+      "text": "A company wants to implement a centralized backup solution for all AWS resources across multiple accounts and regions with automated backup policies and compliance reporting. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q084-a",
+          "text": "Use AWS Backup with Organizations integration, create backup plans with lifecycle policies, enable cross-region and cross-account backup, and use AWS Backup Audit Manager for compliance reporting"
+        },
+        {
+          "id": "q084-b",
+          "text": "Create manual snapshots for each resource"
+        },
+        {
+          "id": "q084-c",
+          "text": "Use Lambda functions to automate backups"
+        },
+        {
+          "id": "q084-d",
+          "text": "Use third-party backup software on EC2"
+        }
+      ],
+      "correctChoiceId": "q084-a",
+      "explanation": "AWS Backup provides centralized backup management across multiple AWS services and accounts. Organizations integration enables centralized backup policies. Backup plans define schedules and retention. Cross-region and cross-account backup provides disaster recovery. Backup Audit Manager provides compliance reporting against frameworks like HIPAA and GDPR. This is a comprehensive, managed solution. Manual snapshots don't scale. Lambda functions require development and maintenance. Third-party software requires management and may not integrate as well.",
+      "difficulty": "medium",
+      "tags": ["AWS Backup", "Backup Policies", "Cross-Region Backup", "Backup Audit Manager", "Compliance", "Multi-Account"]
+    },
+    {
+      "id": "q085",
+      "domain": "complex-organizations",
+      "text": "A company needs to implement a solution that enforces encryption at rest for all data across all AWS services and accounts. They want to prevent creation of unencrypted resources. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q085-a",
+          "text": "Use Service Control Policies (SCPs) to deny creation of unencrypted resources, implement AWS Config rules to detect non-compliant resources, and use AWS Security Hub for centralized compliance monitoring"
+        },
+        {
+          "id": "q085-b",
+          "text": "Manually enable encryption for each resource"
+        },
+        {
+          "id": "q085-c",
+          "text": "Use IAM policies in each account"
+        },
+        {
+          "id": "q085-d",
+          "text": "Rely on default encryption settings"
+        }
+      ],
+      "correctChoiceId": "q085-a",
+      "explanation": "Service Control Policies (SCPs) in AWS Organizations can prevent creation of unencrypted resources across all accounts (preventive control). AWS Config rules detect existing non-compliant resources (detective control). Security Hub aggregates compliance findings and provides centralized monitoring. This provides defense in depth with both preventive and detective controls. Manual enablement doesn't scale. IAM policies can be modified by account administrators. Default encryption settings vary by service and may not be enabled.",
+      "difficulty": "hard",
+      "tags": ["Service Control Policy", "Encryption", "AWS Config", "Security Hub", "Compliance", "Preventive Controls"]
+    },
+    {
+      "id": "q086",
+      "domain": "complex-organizations",
+      "text": "A company operates in a highly regulated industry and needs to implement a solution that provides immutable audit logs with cryptographic verification. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q086-a",
+          "text": "Enable CloudTrail with log file validation, store logs in S3 with S3 Object Lock in compliance mode, use S3 Glacier Vault Lock for long-term retention, and optionally use Amazon QLDB for additional cryptographic verification"
+        },
+        {
+          "id": "q086-b",
+          "text": "Store logs in CloudWatch Logs only"
+        },
+        {
+          "id": "q086-c",
+          "text": "Use EBS volumes for log storage"
+        },
+        {
+          "id": "q086-d",
+          "text": "Store logs in RDS database"
+        }
+      ],
+      "correctChoiceId": "q086-a",
+      "explanation": "CloudTrail log file validation provides cryptographic verification of log integrity. S3 Object Lock in compliance mode prevents deletion or modification of logs, even by root user. Glacier Vault Lock provides additional immutability for long-term retention. Amazon QLDB can provide an additional cryptographically verifiable audit trail. This provides multiple layers of protection for audit logs. CloudWatch Logs alone doesn't provide immutability. EBS volumes can be modified. RDS databases can be altered.",
+      "difficulty": "hard",
+      "tags": ["CloudTrail", "Log File Validation", "S3 Object Lock", "Glacier Vault Lock", "QLDB", "Immutable Logs", "Compliance"]
+    }
+,
+    {
+      "id": "q087",
+      "domain": "new-solutions",
+      "text": "A company is building a real-time collaborative editing application similar to Google Docs. They need to handle concurrent edits from multiple users with conflict resolution. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q087-a",
+          "text": "Use AWS AppSync with DynamoDB for data storage, implement Operational Transformation (OT) or CRDT in resolvers, use AppSync subscriptions for real-time updates, and ElastiCache for session management"
+        },
+        {
+          "id": "q087-b",
+          "text": "Use WebSockets on EC2 with MySQL database"
+        },
+        {
+          "id": "q087-c",
+          "text": "Use REST API with polling"
+        },
+        {
+          "id": "q087-d",
+          "text": "Use S3 for document storage with versioning"
+        }
+      ],
+      "correctChoiceId": "q087-a",
+      "explanation": "AWS AppSync provides managed GraphQL with built-in real-time subscriptions using WebSockets. DynamoDB provides low-latency storage with conditional writes for conflict detection. Implementing OT or CRDT algorithms in resolvers handles concurrent edits. ElastiCache stores session data and temporary edit state. This provides a scalable, real-time collaborative editing platform. EC2 WebSockets require management. REST with polling is inefficient. S3 versioning doesn't handle real-time collaboration.",
+      "difficulty": "hard",
+      "tags": ["AppSync", "Real-time Collaboration", "DynamoDB", "Subscriptions", "Conflict Resolution", "CRDT"]
+    },
+    {
+      "id": "q088",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a solution that processes credit card payments with PCI DSS compliance. They want to minimize their PCI DSS scope. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q088-a",
+          "text": "Use a PCI DSS compliant payment gateway (like Stripe or Adyen) that handles card data, implement tokenization so your application never touches card data, and use Lambda with VPC endpoints for secure API calls"
+        },
+        {
+          "id": "q088-b",
+          "text": "Store credit card data in RDS with encryption"
+        },
+        {
+          "id": "q088-c",
+          "text": "Process payments on EC2 instances"
+        },
+        {
+          "id": "q088-d",
+          "text": "Use S3 to store payment information"
+        }
+      ],
+      "correctChoiceId": "q088-a",
+      "explanation": "Using a PCI DSS compliant payment gateway that handles card data and provides tokens minimizes your PCI DSS scope. Your application only handles tokens, never actual card data. Lambda with VPC endpoints provides secure, isolated communication with the payment gateway. This is the recommended approach for PCI DSS compliance. Storing card data in RDS requires full PCI DSS compliance. Processing on EC2 requires compliance and management. S3 is not designed for sensitive payment data.",
+      "difficulty": "hard",
+      "tags": ["PCI DSS", "Payment Processing", "Tokenization", "Lambda", "VPC Endpoints", "Security", "Compliance"]
+    },
+    {
+      "id": "q089",
+      "domain": "new-solutions",
+      "text": "A company is building a gaming platform that requires extremely low latency (sub-10ms) for player interactions. They have players worldwide. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q089-a",
+          "text": "Use AWS Global Accelerator for anycast routing, deploy game servers on EC2 with Elastic Network Adapter (ENA) in multiple regions, use DynamoDB Global Tables for player data, and ElastiCache Global Datastore for session state"
+        },
+        {
+          "id": "q089-b",
+          "text": "Use a single region with CloudFront"
+        },
+        {
+          "id": "q089-c",
+          "text": "Use Lambda for game logic"
+        },
+        {
+          "id": "q089-d",
+          "text": "Use RDS Multi-AZ for player data"
+        }
+      ],
+      "correctChoiceId": "q089-a",
+      "explanation": "AWS Global Accelerator uses anycast to route players to the nearest healthy endpoint, reducing latency. EC2 with ENA provides enhanced networking for low-latency game servers. DynamoDB Global Tables provide multi-region, low-latency data access. ElastiCache Global Datastore provides sub-millisecond session state access across regions. This architecture minimizes latency globally. Single region increases latency for distant players. Lambda has cold starts and may not meet latency requirements. RDS Multi-AZ doesn't provide global low latency.",
+      "difficulty": "hard",
+      "tags": ["Global Accelerator", "Low Latency", "Gaming", "DynamoDB Global Tables", "ElastiCache Global Datastore", "Multi-Region"]
+    },
+    {
+      "id": "q090",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a solution that generates PDF reports from HTML templates with dynamic data. They generate 10,000 reports per day with varying complexity. What is the MOST cost-effective serverless architecture?",
+      "choices": [
+        {
+          "id": "q090-a",
+          "text": "Use API Gateway to trigger Lambda functions, Lambda with headless Chrome (Puppeteer) for PDF generation, store templates in S3, and store generated PDFs in S3 with presigned URLs for download"
+        },
+        {
+          "id": "q090-b",
+          "text": "Use EC2 instances running 24/7 with PDF generation software"
+        },
+        {
+          "id": "q090-c",
+          "text": "Use SageMaker for PDF generation"
+        },
+        {
+          "id": "q090-d",
+          "text": "Use Elastic Beanstalk with PDF libraries"
+        }
+      ],
+      "correctChoiceId": "q090-a",
+      "explanation": "Lambda with headless Chrome (Puppeteer or similar) can generate PDFs from HTML. API Gateway provides the API interface. S3 stores templates and generated PDFs cost-effectively. Presigned URLs provide secure, temporary access to PDFs. Lambda scales automatically and you only pay for execution time. This is cost-effective for variable workloads. EC2 running 24/7 wastes resources. SageMaker is for ML, not PDF generation. Elastic Beanstalk requires more management than Lambda.",
+      "difficulty": "medium",
+      "tags": ["Lambda", "PDF Generation", "Puppeteer", "API Gateway", "S3", "Serverless", "Presigned URLs"]
+    },
+    {
+      "id": "q091",
+      "domain": "new-solutions",
+      "text": "A company is building a social media platform that needs to implement a news feed algorithm showing personalized content. They have millions of users and billions of posts. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q091-a",
+          "text": "Use DynamoDB for post storage with GSIs for queries, Amazon Personalize for recommendation engine, ElastiCache for feed caching, and Kinesis Data Streams for real-time feed updates"
+        },
+        {
+          "id": "q091-b",
+          "text": "Use RDS with complex SQL queries for feed generation"
+        },
+        {
+          "id": "q091-c",
+          "text": "Use S3 for post storage"
+        },
+        {
+          "id": "q091-d",
+          "text": "Use EC2 instances with in-memory processing"
+        }
+      ],
+      "correctChoiceId": "q091-a",
+      "explanation": "DynamoDB provides scalable, low-latency storage for billions of posts. GSIs enable efficient queries. Amazon Personalize provides ML-powered recommendations without building custom models. ElastiCache caches generated feeds for fast access. Kinesis Data Streams enables real-time feed updates when new posts are created. This architecture scales to millions of users. RDS doesn't scale well for this use case. S3 has higher latency. EC2 in-memory processing doesn't provide the same scalability and managed services.",
+      "difficulty": "hard",
+      "tags": ["DynamoDB", "Amazon Personalize", "ElastiCache", "Kinesis Data Streams", "Social Media", "Recommendation Engine"]
+    },
+    {
+      "id": "q092",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a solution that transcodes videos uploaded by users into multiple formats and resolutions, generates thumbnails, and extracts metadata. Processing must start immediately upon upload. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q092-a",
+          "text": "Use S3 for video storage with Event Notifications, Amazon MediaConvert for transcoding, Lambda for orchestration and thumbnail generation, and DynamoDB for metadata storage"
+        },
+        {
+          "id": "q092-b",
+          "text": "Use EC2 instances with FFmpeg"
+        },
+        {
+          "id": "q092-c",
+          "text": "Use Lambda only for all video processing"
+        },
+        {
+          "id": "q092-d",
+          "text": "Use SageMaker for video processing"
+        }
+      ],
+      "correctChoiceId": "q092-a",
+      "explanation": "S3 Event Notifications trigger processing immediately upon upload. Amazon MediaConvert is a managed service specifically designed for video transcoding with support for multiple formats and resolutions. Lambda orchestrates the workflow and can generate thumbnails. DynamoDB stores metadata. This is a fully managed, scalable solution. EC2 with FFmpeg requires management. Lambda alone can't handle long video transcoding (15-minute timeout). SageMaker is for ML, not video transcoding.",
+      "difficulty": "medium",
+      "tags": ["MediaConvert", "Video Transcoding", "S3 Event Notifications", "Lambda", "DynamoDB", "Media Processing"]
+    },
+    {
+      "id": "q093",
+      "domain": "new-solutions",
+      "text": "A company is building a multi-tenant SaaS application where each tenant's data must be completely isolated at the infrastructure level for compliance. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q093-a",
+          "text": "Use AWS Control Tower to create separate AWS accounts per tenant, use AWS Organizations for centralized management, implement cross-account IAM roles for administration, and use Service Catalog for standardized deployments"
+        },
+        {
+          "id": "q093-b",
+          "text": "Use separate VPCs per tenant in a single account"
+        },
+        {
+          "id": "q093-c",
+          "text": "Use separate databases per tenant in a single account"
+        },
+        {
+          "id": "q093-d",
+          "text": "Use application-level isolation only"
+        }
+      ],
+      "correctChoiceId": "q093-a",
+      "explanation": "Separate AWS accounts per tenant provide the strongest isolation at the infrastructure level, meeting strict compliance requirements. Control Tower automates account creation with best practices. Organizations provides centralized billing and management. Cross-account IAM roles enable administration without sharing credentials. Service Catalog standardizes deployments across accounts. This provides complete isolation while maintaining manageability. Separate VPCs don't provide account-level isolation. Separate databases don't isolate compute and network. Application-level isolation doesn't meet infrastructure isolation requirements.",
+      "difficulty": "hard",
+      "tags": ["Multi-Tenancy", "Account Isolation", "Control Tower", "Organizations", "SaaS", "Compliance", "Service Catalog"]
+    },
+    {
+      "id": "q094",
+      "domain": "new-solutions",
+      "text": "A company needs to implement a solution that provides real-time fraud detection for financial transactions. They process 50,000 transactions per second and need sub-100ms detection latency. What is the BEST architecture?",
+      "choices": [
+        {
+          "id": "q094-a",
+          "text": "Use Kinesis Data Streams for transaction ingestion, Amazon Fraud Detector or SageMaker for ML-based fraud detection, Lambda for real-time processing, and DynamoDB for storing fraud scores"
+        },
+        {
+          "id": "q094-b",
+          "text": "Use batch processing with EMR"
+        },
+        {
+          "id": "q094-c",
+          "text": "Use RDS for transaction storage and analysis"
+        },
+        {
+          "id": "q094-d",
+          "text": "Use S3 with Athena for fraud analysis"
+        }
+      ],
+      "correctChoiceId": "q094-a",
+      "explanation": "Kinesis Data Streams can handle 50,000+ transactions per second. Amazon Fraud Detector provides pre-built fraud detection models, or SageMaker can host custom models. Lambda processes streams in real-time with sub-second latency. DynamoDB provides low-latency storage for fraud scores. This architecture meets the real-time, high-throughput requirements. Batch processing with EMR doesn't meet real-time requirements. RDS can't handle 50,000 TPS. S3 with Athena is for batch analysis, not real-time.",
+      "difficulty": "hard",
+      "tags": ["Fraud Detection", "Kinesis Data Streams", "Amazon Fraud Detector", "SageMaker", "Lambda", "Real-time Processing", "DynamoDB"]
+    },
+    {
+      "id": "q095",
+      "domain": "new-solutions",
+      "text": "A company is building a voice-enabled application that needs to convert speech to text, analyze sentiment, and respond with synthesized speech. What is the BEST serverless architecture?",
+      "choices": [
+        {
+          "id": "q095-a",
+          "text": "Use Amazon Transcribe for speech-to-text, Amazon Comprehend for sentiment analysis, Lambda for business logic, and Amazon Polly for text-to-speech synthesis"
+        },
+        {
+          "id": "q095-b",
+          "text": "Build custom ML models on EC2"
+        },
+        {
+          "id": "q095-c",
+          "text": "Use third-party APIs only"
+        },
+        {
+          "id": "q095-d",
+          "text": "Use SageMaker for all processing"
+        }
+      ],
+      "correctChoiceId": "q095-a",
+      "explanation": "Amazon Transcribe provides accurate speech-to-text conversion. Amazon Comprehend analyzes sentiment from text. Lambda orchestrates the workflow and implements business logic. Amazon Polly synthesizes natural-sounding speech from text. These are all fully managed services that integrate well together. This provides a complete, serverless voice application. Building custom models requires ML expertise and management. Third-party APIs may not integrate as well. SageMaker is for custom ML models, not these pre-built capabilities.",
+      "difficulty": "medium",
+      "tags": ["Transcribe", "Comprehend", "Polly", "Lambda", "Voice Application", "Speech-to-Text", "Text-to-Speech", "Sentiment Analysis"]
+    }
+,
+    {
+      "id": "q096",
+      "domain": "continuous-improvement",
+      "text": "A company's application is experiencing performance degradation due to database connection pool exhaustion. They use Lambda functions connecting to RDS. What is the BEST solution?",
+      "choices": [
+        {
+          "id": "q096-a",
+          "text": "Use Amazon RDS Proxy to pool and manage database connections, enable IAM authentication for Lambda, and implement connection reuse in Lambda functions"
+        },
+        {
+          "id": "q096-b",
+          "text": "Increase RDS instance size"
+        },
+        {
+          "id": "q096-c",
+          "text": "Reduce Lambda concurrency"
+        },
+        {
+          "id": "q096-d",
+          "text": "Use DynamoDB instead"
+        }
+      ],
+      "correctChoiceId": "q096-a",
+      "explanation": "RDS Proxy pools database connections, reducing the number of connections to RDS and preventing connection exhaustion. It's specifically designed for serverless applications like Lambda. IAM authentication eliminates the need to manage database credentials. Connection reuse in Lambda further optimizes connection usage. This solves the root cause. Increasing RDS instance size doesn't solve connection pool exhaustion. Reducing Lambda concurrency limits scalability. DynamoDB is a different data model requiring application rewrite.",
+      "difficulty": "hard",
+      "tags": ["RDS Proxy", "Lambda", "Connection Pooling", "IAM Authentication", "Performance Optimization"]
+    },
+    {
+      "id": "q097",
+      "domain": "continuous-improvement",
+      "text": "A company wants to implement automated cost optimization that right-sizes EC2 instances based on actual usage patterns. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q097-a",
+          "text": "Use AWS Compute Optimizer to get rightsizing recommendations, implement AWS Systems Manager Automation to apply changes during maintenance windows, and use AWS Cost Explorer to track savings"
+        },
+        {
+          "id": "q097-b",
+          "text": "Manually review CloudWatch metrics monthly"
+        },
+        {
+          "id": "q097-c",
+          "text": "Use Auto Scaling only"
+        },
+        {
+          "id": "q097-d",
+          "text": "Downsize all instances by 50%"
+        }
+      ],
+      "correctChoiceId": "q097-a",
+      "explanation": "AWS Compute Optimizer uses ML to analyze historical utilization and provide rightsizing recommendations. Systems Manager Automation can automatically apply these recommendations during maintenance windows, minimizing disruption. Cost Explorer tracks the cost savings achieved. This provides automated, intelligent rightsizing. Manual review doesn't scale and is error-prone. Auto Scaling adjusts capacity but doesn't change instance types. Blanket downsizing may cause performance issues.",
+      "difficulty": "medium",
+      "tags": ["Compute Optimizer", "Rightsizing", "Systems Manager Automation", "Cost Explorer", "Cost Optimization", "Automation"]
+    },
+    {
+      "id": "q098",
+      "domain": "continuous-improvement",
+      "text": "A company's microservices application is experiencing cascading failures when one service becomes unavailable. They need to implement resilience patterns. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q098-a",
+          "text": "Implement circuit breaker pattern using AWS App Mesh, use AWS X-Ray for distributed tracing to identify failure points, implement retry logic with exponential backoff, and use SQS for asynchronous communication"
+        },
+        {
+          "id": "q098-b",
+          "text": "Increase instance sizes for all services"
+        },
+        {
+          "id": "q098-c",
+          "text": "Deploy all services in a single AZ"
+        },
+        {
+          "id": "q098-d",
+          "text": "Remove all error handling"
+        }
+      ],
+      "correctChoiceId": "q098-a",
+      "explanation": "AWS App Mesh provides service mesh capabilities including circuit breaker patterns that prevent cascading failures. X-Ray identifies failure points through distributed tracing. Retry logic with exponential backoff handles transient failures. SQS decouples services and provides buffering during failures. This implements multiple resilience patterns. Increasing instance sizes doesn't prevent cascading failures. Single AZ deployment reduces availability. Removing error handling makes the problem worse.",
+      "difficulty": "hard",
+      "tags": ["App Mesh", "Circuit Breaker", "X-Ray", "Resilience", "Microservices", "SQS", "Fault Tolerance"]
+    },
+    {
+      "id": "q099",
+      "domain": "continuous-improvement",
+      "text": "A company wants to implement automated testing of their disaster recovery procedures without impacting production. What is the BEST approach?",
+      "choices": [
+        {
+          "id": "q099-a",
+          "text": "Use AWS Resilience Hub to define and test recovery objectives, implement AWS Fault Injection Simulator (FIS) to simulate failures, use AWS Backup for automated recovery testing, and document results in Systems Manager"
+        },
+        {
+          "id": "q099-b",
+          "text": "Manually test DR once per year"
+        },
+        {
+          "id": "q099-c",
+          "text": "Test DR in production during business hours"
+        },
+        {
+          "id": "q099-d",
+          "text": "Assume DR will work without testing"
+        }
+      ],
+      "correctChoiceId": "q099-a",
+      "explanation": "AWS Resilience Hub helps define recovery objectives and provides recommendations. Fault Injection Simulator (FIS) safely simulates failures to test DR procedures without impacting production. AWS Backup can test recovery procedures automatically. Systems Manager provides documentation and runbooks. This enables regular, automated DR testing. Annual manual testing is insufficient. Testing in production during business hours is risky. Untested DR procedures often fail when needed.",
+      "difficulty": "hard",
+      "tags": ["Resilience Hub", "Fault Injection Simulator", "AWS Backup", "Disaster Recovery Testing", "Chaos Engineering"]
+    },
+    {
+      "id": "q100",
+      "domain": "continuous-improvement",
+      "text": "A company's application generates detailed performance metrics but they struggle to identify the root cause of performance issues. What is the BEST observability solution?",
+      "choices": [
+        {
+          "id": "q100-a",
+          "text": "Implement CloudWatch ServiceLens to correlate traces, metrics, and logs, use CloudWatch Contributor Insights to identify top contributors to issues, enable CloudWatch Application Insights for automatic problem detection, and use X-Ray service map for visualization"
+        },
+        {
+          "id": "q100-b",
+          "text": "Use CloudWatch metrics only"
+        },
+        {
+          "id": "q100-c",
+          "text": "Manually correlate logs and metrics"
+        },
+        {
+          "id": "q100-d",
+          "text": "Use third-party tools only"
+        }
+      ],
+      "correctChoiceId": "q100-a",
+      "explanation": "CloudWatch ServiceLens integrates X-Ray traces with CloudWatch metrics and logs, providing correlated views for troubleshooting. Contributor Insights identifies top contributors (like specific users or endpoints) to issues. Application Insights uses ML to automatically detect problems. X-Ray service map visualizes dependencies and performance. This provides comprehensive observability for root cause analysis. Metrics alone don't provide full context. Manual correlation doesn't scale. Third-party tools may not integrate as well with AWS services.",
+      "difficulty": "hard",
+      "tags": ["CloudWatch ServiceLens", "Contributor Insights", "Application Insights", "X-Ray", "Observability", "Root Cause Analysis"]
     }
   ]
 }
