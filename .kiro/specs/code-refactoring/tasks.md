@@ -47,7 +47,7 @@
   - _Requirements: 1.4, 6.4_
 
 - [ ] 3. Create shared Button component
-- [ ] 3.1 Create Button component file
+- [x] 3.1 Create Button component file
   - Create `frontend/components/ui/button.tsx`
   - Define ButtonProps interface with all variants
   - Implement Button component with memoization
@@ -55,7 +55,7 @@
   - Support sm, md, lg sizes
   - _Requirements: 3.2, 3.4_
 
-- [ ] 3.2 Implement button styling
+- [x] 3.2 Implement button styling
   - Extract common button styles from existing components
   - Implement haunted theme styling (colors, glow effects)
   - Implement hover and active states
@@ -87,13 +87,13 @@
   - _Requirements: 3.3_
 
 - [ ] 4. Integrate Button component into existing components
-- [ ] 4.1 Update quiz-session.tsx to use Button
+- [x] 4.1 Update quiz-session.tsx to use Button
   - Replace NextButton inline button with shared Button component
   - Map existing props to Button component props
   - Verify visual appearance matches original
   - _Requirements: 3.2, 3.3, 5.3_
 
-- [ ] 4.2 Update results-summary.tsx to use Button
+- [x] 4.2 Update results-summary.tsx to use Button
   - Replace restart button with shared Button component
   - Map existing props to Button component props
   - Verify visual appearance matches original
@@ -105,7 +105,7 @@
   - Verify onClick handlers work correctly
   - _Requirements: 5.5_
 
-- [ ] 4.4 Run visual regression tests
+- [x] 4.4 Run visual regression tests
   - Compare button screenshots before/after
   - Verify no visual regressions
   - _Requirements: 3.3, 5.5_

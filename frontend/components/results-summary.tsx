@@ -15,11 +15,12 @@
 
 "use client";
 
-import { memo, useMemo } from "react";
+import { Button } from "@/components/ui/button";
 import { formatTime, getPerformanceMessage, isPassing } from "@/lib/score-calculator";
 import { colors, createGlow, domainColors } from "@/lib/theme-constants";
 import type { QuizResult } from "@/lib/types";
 import { ContentDomain } from "@/lib/types";
+import { memo, useMemo } from "react";
 
 export interface ResultsSummaryProps {
   /** Quiz result data with all metrics */
@@ -252,24 +253,6 @@ export function ResultsSummary({ result, onRestart }: ResultsSummaryProps) {
     []
   );
 
-  const buttonStyle = useMemo(
-    () => ({
-      backgroundColor: colors.hauntedOrange,
-      color: colors.darkVoid,
-      border: `2px solid ${colors.hauntedOrange}`,
-      boxShadow: `${createGlow(colors.hauntedOrange, "medium")}, inset 0 2px 4px rgba(255, 255, 255, 0.2)`,
-    }),
-    []
-  );
-
-  const buttonFocusStyle = useMemo(
-    () =>
-      ({
-        "--focus-ring-color": colors.hauntedOrange,
-      }) as React.CSSProperties,
-    []
-  );
-
   return (
     <div
       className="w-full max-w-4xl mx-auto p-4 sm:p-6 space-y-6 sm:space-y-8 animate-fadeIn"
@@ -332,18 +315,14 @@ export function ResultsSummary({ result, onRestart }: ResultsSummaryProps) {
 
       {/* Restart Button */}
       <footer className="flex justify-center pt-4 sm:pt-6">
-        <button
+        <Button
           onClick={onRestart}
-          className="px-8 sm:px-10 py-4 sm:py-5 rounded-lg font-bold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-gray-900"
-          style={{
-            ...buttonStyle,
-            ...buttonFocusStyle,
-            minHeight: "48px",
-          }}
-          aria-label="Start a new quiz"
+          variant="primary"
+          size="lg"
+          ariaLabel="Start a new quiz"
         >
           新しいクイズを始める 🎃
-        </button>
+        </Button>
       </footer>
 
       {/* Optimized Animations with reduced motion support */}
