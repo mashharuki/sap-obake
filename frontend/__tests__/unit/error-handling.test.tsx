@@ -10,16 +10,16 @@
  * Requirements: 1.5, 6.5
  */
 
-import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import ErrorBoundary from "@/components/error-boundary";
 import ErrorMessage from "@/components/error-message";
 import InsufficientQuestionsError from "@/components/insufficient-questions-error";
 import QuotaWarning from "@/components/quota-warning";
 import RestorationError from "@/components/restoration-error";
-import { validateQuestionBank } from "@/lib/question-bank";
+import { validateQuestions } from "@/lib/question-loader";
 import { hasSavedQuizState, loadQuizState, saveQuizState } from "@/lib/storage-manager";
 import type { Question, QuizSession } from "@/lib/types";
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock localStorage
 const localStorageMock = (() => {
@@ -277,7 +277,7 @@ describe("Error Handling Tests", () => {
         },
       ] as Question[];
 
-      const validation = validateQuestionBank(invalidQuestions);
+      const validation = validateQuestions(invalidQuestions);
 
       expect(validation.isValid).toBe(false);
       expect(validation.errors[0]).toContain("Invalid domain");
@@ -302,7 +302,7 @@ describe("Error Handling Tests", () => {
         },
       ] as Question[];
 
-      const validation = validateQuestionBank(invalidQuestions);
+      const validation = validateQuestions(invalidQuestions);
 
       expect(validation.isValid).toBe(false);
       expect(validation.errors[0]).toContain("Must have exactly 4 choices");
@@ -328,7 +328,7 @@ describe("Error Handling Tests", () => {
         },
       ];
 
-      const validation = validateQuestionBank(invalidQuestions);
+      const validation = validateQuestions(invalidQuestions);
 
       expect(validation.isValid).toBe(false);
       expect(validation.errors[0]).toContain("correctChoiceId not found in choices");
@@ -354,7 +354,7 @@ describe("Error Handling Tests", () => {
         },
       ];
 
-      const validation = validateQuestionBank(invalidQuestions);
+      const validation = validateQuestions(invalidQuestions);
 
       expect(validation.isValid).toBe(false);
       expect(validation.errors[0]).toContain("Missing explanation");
@@ -394,7 +394,7 @@ describe("Error Handling Tests", () => {
       ];
 
       // Should filter out invalid questions
-      const validation = validateQuestionBank(mixedQuestions);
+      const validation = validateQuestions(mixedQuestions);
       expect(validation.isValid).toBe(false);
       expect(validation.errors.length).toBeGreaterThan(0);
     });
@@ -413,7 +413,7 @@ describe("Error Handling Tests", () => {
         } as Question,
       ];
 
-      validateQuestionBank(invalidQuestions);
+      validateQuestions(invalidQuestions);
 
       expect(consoleSpy).toHaveBeenCalled();
       consoleSpy.mockRestore();

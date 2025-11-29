@@ -39,31 +39,106 @@ export async function loadQuestions(locale: Locale): Promise<Question[]> {
 }
 
 /**
- * Validate question structure
+ * Validate a single question structure with detailed error reporting
+ * @param question - Question to validate
+ * @param index - Optional index for error messages (defaults to 0)
+ * @returns Object with isValid boolean and array of error messages
+ */
+export function validateQuestion(
+  question: Question,
+  index = 0
+): {
+  isValid: boolean;
+  errors: string[];
+} {
+  const errors: string[] = [];
+
+  // Check required fields
+  if (!question.id) errors.push(`Question ${index}: Missing id`);
+  if (!question.text || question.text.trim() === "")
+    errors.push(`Question ${index}: Missing or empty text`);
+  if (!question.explanation || question.explanation.trim() === "")
+    errors.push(`Question ${index}: Missing or empty explanation`);
+
+  // Check choices
+  if (!question.choices || question.choices.length !== 4) {
+    errors.push(`Question ${index}: Must have exactly 4 choices`);
+  } else {
+    // Check each choice
+    question.choices.forEach((choice, choiceIndex) => {
+      if (!choice.id) {
+        errors.push(`Question ${index}, Choice ${choiceIndex}: Missing id`);
+      }
+      if (!choice.text || choice.text.trim() === "") {
+        errors.push(`Question ${index}, Choice ${choiceIndex}: Missing or empty text`);
+      }
+    });
+  }
+
+  // Check correct choice ID exists
+  if (question.choices) {
+    const choiceIds = question.choices.map((c) => c.id);
+    if (!choiceIds.includes(question.correctChoiceId)) {
+      errors.push(`Question ${index}: correctChoiceId not found in choices`);
+    }
+  }
+
+  // Check domain
+  if (!question.domain) {
+    errors.push(`Question ${index}: Missing domain`);
+  }
+
+  // Check difficulty
+  if (!question.difficulty || !["medium", "hard"].includes(question.difficulty)) {
+    errors.push(`Question ${index}: Invalid difficulty (must be 'medium' or 'hard')`);
+  }
+
+  // Check tags
+  if (!question.tags || !Array.isArray(question.tags) || question.tags.length === 0) {
+    errors.push(`Question ${index}: Missing or empty tags array`);
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+}
+
+/**
+ * Validate multiple questions (batch validation)
+ * @param questions - Array of questions to validate
+ * @returns Object with isValid boolean and array of error messages
+ */
+export function validateQuestions(questions: Question[]): {
+  isValid: boolean;
+  errors: string[];
+} {
+  const allErrors: string[] = [];
+
+  questions.forEach((question, index) => {
+    const { errors } = validateQuestion(question, index);
+    allErrors.push(...errors);
+  });
+
+  // Log errors if validation fails
+  if (allErrors.length > 0) {
+    console.error("Question validation failed:", allErrors);
+  }
+
+  return {
+    isValid: allErrors.length === 0,
+    errors: allErrors,
+  };
+}
+
+/**
+ * Quick validation check for a single question (type guard)
  * @param question - Question to validate
  * @returns true if valid, false otherwise
  */
 export function isValidQuestion(question: Question): boolean {
-  return (
-    typeof question.id === "string" &&
-    question.id.length > 0 &&
-    typeof question.domain === "string" &&
-    typeof question.text === "string" &&
-    question.text.trim().length > 0 &&
-    Array.isArray(question.choices) &&
-    question.choices.length === 4 &&
-    question.choices.every(
-      (choice) =>
-        typeof choice.id === "string" &&
-        choice.id.length > 0 &&
-        typeof choice.text === "string" &&
-        choice.text.trim().length > 0
-    ) &&
-    typeof question.correctChoiceId === "string" &&
-    question.choices.some((c) => c.id === question.correctChoiceId) &&
-    typeof question.explanation === "string" &&
-    question.explanation.trim().length > 0
-  );
+  const { isValid } = validateQuestion(question);
+  return isValid;
 }
 
 /**
