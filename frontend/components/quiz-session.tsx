@@ -23,12 +23,12 @@ import Timer from "@/components/timer";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/i18n";
 import {
-    getCorrectAnswerCount,
-    getCurrentQuestion,
-    initializeQuizSession,
-    isQuizComplete,
-    moveToNextQuestion,
-    recordAnswer,
+  getCorrectAnswerCount,
+  getCurrentQuestion,
+  initializeQuizSession,
+  isQuizComplete,
+  moveToNextQuestion,
+  recordAnswer,
 } from "@/lib/quiz-manager";
 import { calculateQuizResult } from "@/lib/score-calculator";
 import { saveQuizState } from "@/lib/storage-manager";

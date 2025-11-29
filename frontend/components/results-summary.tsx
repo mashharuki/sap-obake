@@ -315,12 +315,7 @@ export function ResultsSummary({ result, onRestart }: ResultsSummaryProps) {
 
       {/* Restart Button */}
       <footer className="flex justify-center pt-4 sm:pt-6">
-        <Button
-          onClick={onRestart}
-          variant="primary"
-          size="lg"
-          ariaLabel="Start a new quiz"
-        >
+        <Button onClick={onRestart} variant="primary" size="lg" ariaLabel="Start a new quiz">
           新しいクイズを始める 🎃
         </Button>
       </footer>

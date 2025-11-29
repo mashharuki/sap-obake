@@ -1,9 +1,9 @@
 /**
  * Button Component
- * 
+ *
  * Shared button component with haunted theme styling.
  * Supports multiple variants and sizes for consistent UI across the application.
- * 
+ *
  * Requirements: 3.2, 3.4
  */
 
@@ -78,7 +78,7 @@ function getSizeClasses(size: ButtonProps["size"] = "md"): string {
 
 /**
  * Button component with haunted theme styling
- * 
+ *
  * Features:
  * - Multiple variants (primary, secondary, ghost)
  * - Multiple sizes (sm, md, lg)
@@ -123,15 +123,19 @@ export const Button = memo(function Button({
         disabled:cursor-not-allowed
         disabled:hover:scale-100
         ${className}
-      `.trim().replace(/\s+/g, ' ')}
-      style={{
-        ...variantStyles,
-        touchAction: "manipulation",
-        WebkitTapHighlightColor: "transparent",
-        minHeight: "48px",
-        minWidth: size === "sm" ? "80px" : "120px",
-        "--tw-ring-color": variant === "primary" ? colors.hauntedOrange : colors.midnightPurple,
-      } as React.CSSProperties}
+      `
+        .trim()
+        .replace(/\s+/g, " ")}
+      style={
+        {
+          ...variantStyles,
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+          minHeight: "48px",
+          minWidth: size === "sm" ? "80px" : "120px",
+          "--tw-ring-color": variant === "primary" ? colors.hauntedOrange : colors.midnightPurple,
+        } as React.CSSProperties
+      }
       aria-label={ariaLabel}
       aria-disabled={disabled}
     >
